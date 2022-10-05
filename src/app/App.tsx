@@ -1,8 +1,9 @@
-import React, { Suspense } from 'react';
-import { Routes, Route, Link } from "react-router-dom";
-import {useTheme} from "app/providers/ThemeProvider";
-import { MainPage } from "pages/MainPage";
-import { AboutPage } from "pages/AboutPage";
+import React from 'react';
+import { Link } from "react-router-dom";
+import { useTheme } from "app/providers/theme";
+import { AppRouter } from "app/providers/router";
+import { RoutesPaths } from "./providers/router/config";
+
 import './styles/index.scss';
 
 const App = () => {
@@ -10,17 +11,12 @@ const App = () => {
 
   return (
     <div className="app" data-theme={theme}>
-      <Link to="/">Главная</Link>
-      <Link to="/about">О компании</Link>
+      <Link to={RoutesPaths.MAIN}>Главная</Link>
+      <Link to={RoutesPaths.ABOUT}>О компании</Link>
 
       <button onClick={changeTheme}>Сменить тему</button>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
-      </Suspense>
+      <AppRouter />
     </div>
   );
 };
