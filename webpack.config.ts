@@ -3,11 +3,12 @@ import {Configuration} from "webpack";
 import buildWebpackConfig from "./config/build/buildWebpackConfig";
 import {BuildEnv, BuildMode, BuildPaths} from "./config/build/types/config";
 
-const webpackConfig = (env: BuildEnv): Configuration => {
+export default (env: BuildEnv): Configuration => {
   const paths: BuildPaths = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: path.resolve(__dirname, 'build'),
-    html: path.resolve(__dirname, 'public', 'index.html')
+    html: path.resolve(__dirname, 'public', 'index.html'),
+    src: path.resolve(__dirname, 'src')
   };
 
   const mode: BuildMode = env.mode || 'development';
@@ -22,5 +23,3 @@ const webpackConfig = (env: BuildEnv): Configuration => {
     isDev,
   });
 }
-
-export default webpackConfig;

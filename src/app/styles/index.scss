@@ -1,8 +1,8 @@
-@import "./reset";
-@import "./variables/global";
+@import "reset";
+@import "variables/global";
 
-@import "./themes/default";
-@import "./themes/dark";
+@import "themes/default";
+@import "themes/dark";
 
 .app {
   font-family: var(--font-primary);

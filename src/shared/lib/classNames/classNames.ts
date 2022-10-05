@@ -1,4 +1,3 @@
-
 type Mods = Record<string, string | boolean>
 
 const classNames = (className: string, mods: Mods, additional: string[]) => {

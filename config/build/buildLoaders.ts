@@ -6,7 +6,7 @@ function buildLoaders(isDev: boolean): RuleSetRule[] {
     test: /\.tsx?$/,
     use: 'ts-loader',
     exclude: /node_modules/,
-  };
+  }
 
   const stylesLoader: RuleSetRule = {
     test: /\.s[ac]ss$/i,
@@ -23,7 +23,7 @@ function buildLoaders(isDev: boolean): RuleSetRule[] {
       },
       'sass-loader',
     ],
-  };
+  }
 
   return [
     typescriptLoader,
