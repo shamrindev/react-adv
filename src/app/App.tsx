@@ -1,19 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useTheme } from "app/providers/theme";
 import { AppRouter } from "app/providers/router";
-import { Navbar } from "widgets/navbar";
+import { Navbar } from "widgets/Navbar";
+import { Sidebar } from "widgets/Sidebar";
 
 import './styles/index.scss';
-import ThemeSwitcher from "shared/ui/ThemeSwitcher/ThemeSwitcher";
 
 const App = () => {
   const { theme } = useTheme();
 
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme])
+
   return (
-    <div className="app" data-theme={theme}>
+    <div className="app">
       <Navbar />
-      <ThemeSwitcher />
-      <AppRouter />
+      <div className="content-page">
+        <Sidebar />
+        <AppRouter />
+      </div>
     </div>
   );
 };

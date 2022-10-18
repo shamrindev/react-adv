@@ -11,10 +11,10 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ className }) => {
 
   return (
-    <div className={classNames(cls.navbar, className)}>
+    <nav className={classNames(cls.navbar, className)}>
       <Link className={classNames(cls.link)} to={RoutesPaths.MAIN}>Главная</Link>
       <Link className={classNames(cls.link)} to={RoutesPaths.ABOUT}>О компании</Link>
-    </div>
+    </nav>
   );
 };
 
