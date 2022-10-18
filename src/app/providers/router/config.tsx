@@ -1,11 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { AboutPage } from "pages/about";
 import { MainPage } from "pages/main";
-
-export enum RoutesPaths {
-  MAIN = '/',
-  ABOUT = '/about',
-}
+import { RoutesPaths } from "shared/constants/routes";
 
 export const routesConfig: RouteObject[] = [
   {

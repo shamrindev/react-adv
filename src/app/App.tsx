@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { useTheme } from "app/providers/theme";
 import { AppRouter } from "app/providers/router";
-import { RoutesPaths } from "./providers/router/config";
-
+import { Navbar } from "widgets/navbar";
 import './styles/index.scss';
 
 const App = () => {
@@ -11,11 +9,8 @@ const App = () => {
 
   return (
     <div className="app" data-theme={theme}>
-      <Link to={RoutesPaths.MAIN}>Главная</Link>
-      <Link to={RoutesPaths.ABOUT}>О компании</Link>
-
+      <Navbar />
       <button onClick={changeTheme}>Сменить тему</button>
-
       <AppRouter />
     </div>
   );
