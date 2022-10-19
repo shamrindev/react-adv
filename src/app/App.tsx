@@ -1,17 +1,17 @@
 import React, { Suspense, useEffect } from 'react';
-import { useTheme } from "app/providers/theme";
-import { AppRouter } from "app/providers/router";
-import { Navbar } from "widgets/Navbar";
-import { Sidebar } from "widgets/Sidebar";
+import { useTheme } from 'app/providers/theme';
+import { AppRouter } from 'app/providers/router';
+import { Navbar } from 'widgets/Navbar';
+import { Sidebar } from 'widgets/Sidebar';
 
 import './styles/index.scss';
 
-const App = () => {
+function App() {
   const { theme } = useTheme();
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
-  }, [theme])
+  }, [theme]);
 
   return (
     <Suspense fallback="">
@@ -24,6 +24,6 @@ const App = () => {
       </div>
     </Suspense>
   );
-};
+}
 
 export default App;

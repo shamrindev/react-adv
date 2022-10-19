@@ -16,10 +16,10 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
 
   const getIcon = () => {
     if (theme === Theme.Light) {
-      return <MoonIcon />
+      return <MoonIcon />;
     }
-    return <SunIcon />
-  }
+    return <SunIcon />;
+  };
 
   return (
     <Button className={classNames(cls.button, className)} onClick={changeTheme}>

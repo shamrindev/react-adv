@@ -11,7 +11,7 @@ export default (env: BuildEnv): Configuration => {
     entry: path.resolve(__dirname, 'src/index.tsx'),
     output: path.resolve(__dirname, 'build'),
     html: path.resolve(__dirname, 'public/index.html'),
-    src: path.resolve(__dirname, 'src')
+    src: path.resolve(__dirname, 'src'),
   };
 
   return buildWebpackConfig({
@@ -20,4 +20,4 @@ export default (env: BuildEnv): Configuration => {
     port,
     isDev,
   });
-}
+};

@@ -1,15 +1,15 @@
 import { RuleSetRule } from 'webpack';
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
-import { BuildOptions } from "./types/config";
+import { BuildOptions } from './types/config';
 
 function buildLoaders(options: BuildOptions): RuleSetRule[] {
-  const { isDev } = options
+  const { isDev } = options;
 
   const svgLoader: RuleSetRule = {
     test: /\.svg$/,
     use: ['@svgr/webpack'],
-  }
+  };
 
   const fileLoader: RuleSetRule = {
     test: /\.(png|jpe?g|gif)$/i,
@@ -18,7 +18,7 @@ function buildLoaders(options: BuildOptions): RuleSetRule[] {
         loader: 'file-loader',
       },
     ],
-  }
+  };
 
   const typescriptLoader: RuleSetRule = {
     test: /\.tsx?$/,
@@ -34,7 +34,7 @@ function buildLoaders(options: BuildOptions): RuleSetRule[] {
         },
       },
     ],
-  }
+  };
 
   const stylesLoader: RuleSetRule = {
     test: /\.s[ac]ss$/i,
@@ -46,19 +46,19 @@ function buildLoaders(options: BuildOptions): RuleSetRule[] {
           modules: {
             auto: /\.module/,
             localIdentName: isDev ? '[local]--[hash:base64:6]' : '[hash:base64:8]',
-          }
-        }
+          },
+        },
       },
       'sass-loader',
     ],
-  }
+  };
 
   return [
     svgLoader,
     fileLoader,
     typescriptLoader,
-    stylesLoader
-  ]
+    stylesLoader,
+  ];
 }
 
 export default buildLoaders;

@@ -12,5 +12,4 @@ i18n
     debug: __IS_DEV__,
   });
 
-
 export default i18n;
