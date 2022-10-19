@@ -1,7 +1,10 @@
-import {RuleSetRule} from 'webpack';
+import { RuleSetRule } from 'webpack';
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { BuildOptions } from "./types/config";
 
-function buildLoaders(isDev: boolean): RuleSetRule[] {
+function buildLoaders(options: BuildOptions): RuleSetRule[] {
+  const { isDev } = options
+
   const svgLoader: RuleSetRule = {
     test: /\.svg$/,
     use: ['@svgr/webpack'],
