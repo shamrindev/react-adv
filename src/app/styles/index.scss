@@ -1,19 +1,21 @@
 @import "reset";
 @import "variables/global";
-
 @import "themes/light";
 @import "themes/dark";
 
 body {
   font-family: var(--font-primary);
-
   background-color: var(--color-bg);
   color: var(--color-text-main);
-
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
 }
 

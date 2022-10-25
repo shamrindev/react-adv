@@ -1,7 +1,7 @@
-*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+*:where(:not(html, iframe, canvas, img, svg, video, audio, svg *, symbol *)) {
   all: unset;
   display: revert;
-  -webkit-user-select: auto;
+  user-select: auto;
 }
 
 *::before,
@@ -9,11 +9,14 @@
   box-sizing: border-box;
 }
 
-a, button {
+a,
+button {
   cursor: revert;
 }
 
-ol, ul, menu {
+ol,
+ul,
+menu {
   list-style: none;
 }
 
@@ -25,15 +28,16 @@ table {
   border-collapse: collapse;
 }
 
-input, textarea {
-  -webkit-user-select: auto;
+input,
+textarea {
+  user-select: auto;
 }
+
 textarea {
   white-space: revert;
 }
 
 meter {
-  -webkit-appearance: revert;
   appearance: revert;
 }
 
@@ -50,7 +54,7 @@ meter {
   -webkit-user-modify: read-write;
   overflow-wrap: break-word;
   -webkit-line-break: after-white-space;
-  -webkit-user-select: auto;
+  user-select: auto;
 }
 
 :where([draggable="true"]) {

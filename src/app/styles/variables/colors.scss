@@ -43,7 +43,7 @@
   --ui-sb-color-link-visited: #bc8ef2;
 }
 
-.sb-colors-light{
+.sb-colors-light {
   --ui-sb-color-text-main: #000;
   --ui-sb-color-text-main-always-light: #e3e3e3;
   --ui-sb-color-text-secondary: #6b6b6b;
@@ -86,8 +86,8 @@
   --ui-sb-color-icon-main: #000;
   --ui-sb-color-icon-secondary: #c3c2be;
   --ui-sb-color-link-visited: #5d1793;
-  --ui-sb-shadow-elevation-2: 0 4px 8px rgba(0,0,0,.02),0 0 2px rgba(0,0,0,.08),0 0 1px rgba(0,0,0,.12);
-  --ui-sb-shadow-elevation-4: 0 4px 8px rgba(0,0,0,.04),0 0 2px rgba(0,0,0,.08),0 0 1px rgba(0,0,0,.04);
-  --ui-sb-shadow-elevation-10: 0 4px 4px rgba(0,0,0,.04),0 4px 20px rgba(0,0,0,.1);
-  --ui-sb-gradient-skeleton: linear-gradient(90deg,transparent,hsla(0,0%,100%,.5),transparent);
+  --ui-sb-shadow-elevation-2: 0 4px 8px rgb(0 0 0 / 2%), 0 0 2px rgb(0 0 0 / 8%), 0 0 1px rgb(0 0 0 / 12%);
+  --ui-sb-shadow-elevation-4: 0 4px 8px rgb(0 0 0 / 4%), 0 0 2px rgb(0 0 0 / 8%), 0 0 1px rgb(0 0 0 / 4%);
+  --ui-sb-shadow-elevation-10: 0 4px 4px rgb(0 0 0 / 4%), 0 4px 20px rgb(0 0 0 / 10%);
+  --ui-sb-gradient-skeleton: linear-gradient(90deg, transparent, hsl(0deg 0% 100% / 50%), transparent);
 }
