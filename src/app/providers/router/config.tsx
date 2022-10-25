@@ -1,7 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import { AboutPage } from 'pages/about';
-import { MainPage } from 'pages/main';
 import { RoutesPaths } from 'shared/constants/routes';
+import { AboutPage } from 'pages/AboutPage';
+import { MainPage } from 'pages/MainPage';
+import { NotFoundPage } from 'pages/NotFoundPage';
 
 export const routesConfig: RouteObject[] = [
   {
@@ -12,4 +13,9 @@ export const routesConfig: RouteObject[] = [
     path: RoutesPaths.ABOUT,
     element: <AboutPage />,
   },
+  {
+    path: RoutesPaths.NOT_FOUND,
+    element: <NotFoundPage />,
+  },
+
 ];
