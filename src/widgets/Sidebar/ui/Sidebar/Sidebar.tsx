@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher';
-import LanguageSwitcher from 'shared/ui/LanguageSwitcher/LanguageSwitcher';
+import { LanguageSwitcher, ThemeSwitcher } from 'shared/ui';
 import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
