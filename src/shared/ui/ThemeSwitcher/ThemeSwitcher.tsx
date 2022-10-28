@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import { Theme, useTheme } from 'app/providers/ThemeProvider';
-import { Button } from 'shared/ui';
-import SunIcon from 'shared/assets/icons/sun.svg';
-import MoonIcon from 'shared/assets/icons/moon.svg';
-
+import { useTranslation } from 'react-i18next';
+import { Theme, useTheme } from '@/app/providers/ThemeProvider';
+import { Button } from '@/shared/ui';
+import SunIcon from '@/shared/assets/icons/sun.svg';
+import MoonIcon from '@/shared/assets/icons/moon.svg';
 import cls from './ThemeSwitcher.module.scss';
 
 interface ThemeSwitcherProps {
@@ -12,6 +12,7 @@ interface ThemeSwitcherProps {
 }
 
 const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
+  const { t } = useTranslation();
   const { theme, changeTheme } = useTheme();
 
   const getIcon = () => {
@@ -21,8 +22,21 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
     return <SunIcon />;
   };
 
+  const getTitle = () => {
+    if (theme === Theme.Light) {
+      return t('Переключить на темную тему');
+    }
+    return t('Переключить на светлую тему');
+  };
+
   return (
-    <Button className={classNames(cls.button, className)} onClick={changeTheme}>
+    <Button
+      className={classNames(cls.button, className)}
+      onClick={changeTheme}
+      title={getTitle()}
+      data-testid="ThemeSwitcher"
+      data-testval={theme}
+    >
       {getIcon()}
     </Button>
   );

@@ -1,9 +1,19 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, {
+  FC, ReactNode, useMemo, useState,
+} from 'react';
 import { Theme, LOCAL_STORAGE_THEME_KEY, ThemeContext } from '../lib/ThemeContext';
 
-const ThemeProvider: FC = ({ children }) => {
-  const defaultTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme || Theme.Dark;
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+interface ThemeProviderProps {
+  children: ReactNode,
+  initState?: Theme
+}
+
+const savedTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme;
+const defaultTheme = window.matchMedia && (
+  window.matchMedia('(prefers-color-scheme: dark)') ? Theme.Dark : Theme.Light);
+
+const ThemeProvider: FC<ThemeProviderProps> = ({ children, initState }) => {
+  const [theme, setTheme] = useState<Theme>(initState || savedTheme || defaultTheme);
 
   const defaultProps = useMemo(() => ({
     theme,
