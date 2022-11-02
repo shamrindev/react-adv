@@ -5,7 +5,7 @@ import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildOptions } from './types/config';
 
-function buildPlugins(options: BuildOptions): WebpackPluginInstance[] {
+export function buildPlugins(options: BuildOptions): WebpackPluginInstance[] {
   const { paths, isDev } = options;
 
   const plugins = [
@@ -20,19 +20,15 @@ function buildPlugins(options: BuildOptions): WebpackPluginInstance[] {
     new DefinePlugin({
       __IS_DEV__: isDev,
     }),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false,
-    }),
   ];
 
   if (isDev) {
     plugins.push(
       new webpack.HotModuleReplacementPlugin(),
       new ReactRefreshPlugin(),
+      new BundleAnalyzerPlugin({ openAnalyzer: false }),
     );
   }
 
   return plugins;
 }
-
-export default buildPlugins;

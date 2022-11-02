@@ -1,7 +1,7 @@
 import { ResolveOptions } from 'webpack';
 import { BuildOptions } from './types/config';
 
-function buildResolves(options: BuildOptions): ResolveOptions {
+export function buildResolves(options: BuildOptions): ResolveOptions {
   const { paths } = options;
 
   return {
@@ -9,8 +9,8 @@ function buildResolves(options: BuildOptions): ResolveOptions {
     preferAbsolute: true,
     modules: [paths.src, 'node_modules'],
     mainFiles: ['index'],
-    alias: {},
+    alias: {
+      '@': options.paths.src,
+    },
   };
 }
-
-export default buildResolves;

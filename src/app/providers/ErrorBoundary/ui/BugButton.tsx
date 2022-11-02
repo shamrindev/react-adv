@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import { Button } from 'shared/ui';
+import { useTranslation } from 'react-i18next';
+import { Button } from '@/shared/ui';
 
 const BugButton: FC = () => {
+  const { t } = useTranslation();
   const [error, setError] = useState(false);
 
   const onThrow = () => setError(true);
@@ -16,7 +18,7 @@ const BugButton: FC = () => {
     <Button
       onClick={onThrow}
     >
-      throw error
+      {t('Ошибка')}
     </Button>
   );
 };
