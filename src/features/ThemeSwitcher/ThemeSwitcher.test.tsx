@@ -1,8 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { Theme } from '@/app/providers/ThemeProvider';
+import { Theme } from '@/shared/constants/themes';
 import { renderComponent } from '@/shared/lib/tests/renderComponent';
-
-import ThemeSwitcher from './ThemeSwitcher';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 describe('ThemeSwitcher', () => {
   let btn: HTMLElement;

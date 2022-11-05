@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/ui';
+import { Button } from '@/shared/ui/Button';
 
 interface LanguageSwitcherProps {
   className?: string,
 }
 
-const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
+export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = () => {
@@ -20,5 +20,3 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
     </Button>
   );
 };
-
-export default LanguageSwitcher;

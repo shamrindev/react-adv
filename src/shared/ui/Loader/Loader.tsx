@@ -4,10 +4,9 @@ import cls from './Loader.module.scss';
 
 interface LoaderProps {
   className?: string,
+  size?: 's' | 'm' | 'l'
 }
 
-const Loader: FC<LoaderProps> = ({ className }) => (
-  <span className={classNames(cls.loader, className)} />
+export const Loader: FC<LoaderProps> = ({ className, size = 'm' }) => (
+  <span className={classNames(cls.loader, className, cls[size])} />
 );
-
-export default Loader;

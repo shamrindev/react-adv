@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { Theme, ThemeProvider } from '@/app/providers/ThemeProvider';
+import { Theme } from '@/shared/constants/themes';
+import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import i18n from '@/shared/config/i18n/i18nForTests';
 
 interface RenderComponentOptions {

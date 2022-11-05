@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { routesConfig } from '@/app/providers/router/config';
-import { Loader } from '@/shared/ui';
+import { Loader } from '@/shared/ui/Loader';
 
-const AppRouter = () => (
+export const AppRouter = () => (
   <Suspense fallback={<Loader />}>
     <Routes>
       {routesConfig.map(({ element, path }) => (
@@ -20,5 +20,3 @@ const AppRouter = () => (
     </Routes>
   </Suspense>
 );
-
-export default AppRouter;

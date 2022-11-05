@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Theme, useTheme } from '@/app/providers/ThemeProvider';
-import { Button } from '@/shared/ui';
+import { useTheme } from '@/shared/lib/hooks/useTheme';
+import { Theme } from '@/shared/constants/themes';
+import { Button } from '@/shared/ui/Button';
 import SunIcon from '@/shared/assets/icons/sun.svg';
 import MoonIcon from '@/shared/assets/icons/moon.svg';
 import cls from './ThemeSwitcher.module.scss';
@@ -11,7 +12,7 @@ interface ThemeSwitcherProps {
   className?: string,
 }
 
-const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
+export const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
   const { t } = useTranslation();
   const { theme, changeTheme } = useTheme();
 
@@ -41,5 +42,3 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
     </Button>
   );
 };
-
-export default ThemeSwitcher;

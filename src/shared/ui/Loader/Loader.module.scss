@@ -1,64 +1,35 @@
 .loader {
-  display: inline-block;
-  position: relative;
   width: 48px;
   height: 48px;
-  color: var(--color-text-main);
-  transform: rotateZ(45deg);
-}
-
-.loader::before,
-.loader::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: inherit;
-  height: inherit;
+  border: 3px solid var(--color-text-main);
+  border-bottom-color: transparent;
   border-radius: 50%;
-  transform: rotateX(70deg);
-  animation: 1s spin linear infinite;
-  box-shadow: 0.2em 0 0 0;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 0.75s linear infinite;
 }
 
-.loader::after {
-  color: var(--color-brand);
-  transform: rotateY(70deg);
-  animation-delay: 0.3s;
+.s {
+  width: 16px;
+  height: 16px;
 }
 
-@keyframes spin {
-  0%,
+.m {
+  width: 32px;
+  height: 32px;
+}
+
+.l {
+  width: 48px;
+  height: 48px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
   100% {
-    box-shadow: 0.2em 0 0 0;
-  }
-
-  12% {
-    box-shadow: 0.2em 0.2em 0 0;
-  }
-
-  25% {
-    box-shadow: 0 0.2em 0 0;
-  }
-
-  37% {
-    box-shadow: -0.2em 0.2em 0 0;
-  }
-
-  50% {
-    box-shadow: -0.2em 0 0 0;
-  }
-
-  62% {
-    box-shadow: -0.2em -0.2em 0 0;
-  }
-
-  75% {
-    box-shadow: 0 -0.2em 0 0;
-  }
-
-  87% {
-    box-shadow: 0.2em -0.2em 0 0;
+    transform: rotate(360deg);
   }
 }

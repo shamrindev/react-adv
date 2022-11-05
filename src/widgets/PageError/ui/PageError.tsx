@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/ui';
+import { Button } from '@/shared/ui/Button';
 
 import cls from './PageError.module.scss';
 
