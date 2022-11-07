@@ -1,6 +1,15 @@
-[data-theme="light"] {
+:root {
   --color-bg: #fff;
-  --color-text-main: #000;
-  --color-text-secondary: #6b6b6b;
-  --color-brand: #5289b5;
+  --color-primary: #000;
+  --color-secondary: #6b6b6b;
+  --color-accent: #007bff;
+  --color-accent-hover: #0056b3;
+  --color-error: #dc3545;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+
+  // button
+  --color-button-color: #fff;
+  --color-button-disabled: #aaa;
 }

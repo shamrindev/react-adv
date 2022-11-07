@@ -7,12 +7,6 @@ import { Sidebar } from '@/widgets/Sidebar';
 import './styles/index.scss';
 
 function App() {
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-  }, [theme]);
-
   return (
     <Suspense fallback="">
       <div className="app">

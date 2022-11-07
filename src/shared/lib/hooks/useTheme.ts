@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { LOCAL_STORAGE_THEME_KEY } from '@/shared/constants/localstorage';
 import { ThemeContext } from '@/shared/lib/context/ThemeContext';
 import { Theme } from '@/shared/constants/themes';
@@ -16,6 +16,12 @@ export const useTheme = (): UseThemeResult => {
     setTheme(newTheme);
     localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
   };
+
+  useEffect(() => {
+    const bodyClasses = window.document.body.classList;
+    bodyClasses.remove(Theme.Light, Theme.Dark);
+    bodyClasses.add(theme);
+  }, [theme]);
 
   return {
     theme,

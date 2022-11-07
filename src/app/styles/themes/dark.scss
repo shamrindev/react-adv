@@ -1,6 +1,15 @@
-[data-theme="dark"] {
+.dark-theme {
   --color-bg: #141414;
-  --color-text-main: #e3e3e3;
-  --color-text-secondary: #9d9b98;
-  --color-brand: #5289b5;
+  --color-primary: #e3e3e3;
+  --color-secondary: #9d9b98;
+  --color-accent: #007bff;
+  --color-accent-hover: #0056b3;
+  --color-error: #dc3545;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+
+  // button
+  --color-button-color: #fff;
+  --color-button-disabled: #aaa;
 }
