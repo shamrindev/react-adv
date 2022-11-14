@@ -1,38 +1,56 @@
 name: building, linting, testing
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+
 jobs:
   pipeline:
     runs-on: ubuntu-latest
+
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [ 19.x ]
+        node-version: [19.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+        if: runner.os == 'Linux'
+
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: install modules
+
+      - name: Install dependencies
         run: npm ci
-      - name: build production project
+
+      - name: Build production
         run: npm run build:prod
         if: always()
-      - name: linting typescript
+
+      - name: Lint ts
         run: npm run lint:ts
         if: always()
-      - name: linting css
+
+      - name: Lint scss
         run: npm run lint:scss
-      - name: unit testing
-        if: always()
+
+      - name: Unit testing
         run: npm run test:unit
-      - name: build storybook
+        if: always()
+
+      - name: Build Storybook
         run: npm run storybook:build
         if: always()
-      - name: screenshot testing
+
+      - name: Screenshot testing
         run: npm run test:ui:ci
         if: always()
