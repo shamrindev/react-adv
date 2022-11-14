@@ -18,8 +18,8 @@ describe('ThemeSwitcher', () => {
   });
 
   test('switch', () => {
-    expect(btn.getAttribute('data-testval')).toBe('light');
+    expect(btn.getAttribute('data-testval')).toBe(Theme.Light);
     fireEvent.click(btn);
-    expect(btn.getAttribute('data-testval')).toBe('dark');
+    expect(btn.getAttribute('data-testval')).toBe(Theme.Dark);
   });
 });
