@@ -57,4 +57,5 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['**/config/templates'],
 };

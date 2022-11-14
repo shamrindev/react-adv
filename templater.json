@@ -1,0 +1,18 @@
+{
+  "templatesPath": "./config/templates",
+  "filesCase": "pascal",
+  "templates": [
+    {
+      "name": "ui",
+      "description": "",
+      "templatePath": "./ui",
+      "outputPath": "./src/shared/ui",
+      "replaceRules": [
+        {
+          "keyword": "__name__",
+          "case": "pascal"
+        }
+      ]
+    }
+  ]
+}
