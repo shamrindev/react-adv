@@ -1,21 +1,60 @@
 .Button {
-  cursor: pointer;
-  background-color: var(--color-accent);
-  color: var(--color-button-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--size-border-radius);
   line-height: 1;
-  border-radius: 5px;
-  padding: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.primary {
+  background-color: var(--color-element-accent);
+  color: var(--color-white);
 
   &:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--color-element-accent-hover);
+  }
+}
+
+.secondary {
+  background-color: var(--color-bg-secondary);
+
+  &:hover {
+    background-color: var(--color-bg-accent);
+  }
+}
+
+.icon {
+  padding: 0;
+  width: var(--size-m);
+  height: var(--size-m);
+}
+
+.ghost {
+  background-color: transparent;
+  color: currentcolor;
+
+  &:hover {
+    background-color: var(--color-bg-accent);
+  }
+}
+
+.clear {
+  background: none;
+  color: currentcolor;
+  padding: 0;
+
+  &:hover {
+    background: none;
   }
 }
 
 .disabled {
-  background-color: var(--color-button-disabled);
+  background-color: var(--color-element-disabled);
   cursor: default;
 
   &:hover {
-    background-color: var(--color-button-disabled);
+    background-color: var(--color-element-disabled);
   }
 }

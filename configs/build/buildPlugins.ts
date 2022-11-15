@@ -26,7 +26,7 @@ export function buildPlugins(options: BuildOptions): WebpackPluginInstance[] {
     plugins.push(
       new webpack.HotModuleReplacementPlugin(),
       new ReactRefreshPlugin(),
-      new BundleAnalyzerPlugin({ openAnalyzer: false }),
+      // new BundleAnalyzerPlugin({ openAnalyzer: false }),
     );
   }
 

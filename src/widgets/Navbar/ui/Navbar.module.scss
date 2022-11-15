@@ -1,6 +1,9 @@
 .navbar {
   display: flex;
-  padding: 30px 0;
+  background-color: var(--color-bg-secondary);
+  height: var(--size-navbar-height);
+  padding: 0 20px;
+  align-items: center;
   justify-content: flex-end;
 }
 

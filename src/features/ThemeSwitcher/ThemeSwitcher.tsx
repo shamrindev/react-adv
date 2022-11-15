@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
 import { Theme } from '@/shared/constants/themes';
 import { Button } from '@/shared/ui/Button';
-import SunIcon from '@/shared/assets/icons/sun.svg';
-import MoonIcon from '@/shared/assets/icons/moon.svg';
+import SunIcon from '@/shared/assets/icons/IconSun.svg';
+import MoonIcon from '@/shared/assets/icons/IconMoon.svg';
 import cls from './ThemeSwitcher.module.scss';
 
 interface ThemeSwitcherProps {
@@ -34,6 +34,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
     <Button
       className={classNames(cls.button, className)}
       onClick={changeTheme}
+      variant="clear"
       title={getTitle()}
       data-testid="ThemeSwitcher"
       data-testval={theme}

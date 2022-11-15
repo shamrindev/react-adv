@@ -1,9 +1,9 @@
 declare module '*.scss';
 
 declare module '*.svg' {
-  import React from 'react';
+  import { FC, SVGAttributes } from 'react';
 
-  const content: React.ElementType<React.ComponentPropsWithRef<'svg'>>;
+  const content: FC<SVGAttributes<SVGElement>>;
   export default content;
 }
 

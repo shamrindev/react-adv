@@ -3,10 +3,14 @@
 @import "themes/light";
 @import "themes/dark";
 
+html {
+  font-size: 100%;
+}
+
 body {
   font-family: var(--font-primary);
-  background-color: var(--color-bg);
-  color: var(--color-primary);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
   min-height: 100vh;
 }
 
@@ -25,5 +29,6 @@ h6 {
 
 .page-wrapper {
   flex-grow: 1;
-  padding: 0 20px;
+  padding: 20px;
+  border-top: 1px solid var(--color-bg-accent);
 }

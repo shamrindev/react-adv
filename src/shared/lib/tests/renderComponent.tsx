@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Theme } from '@/shared/constants/themes';
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
-import i18n from '@/shared/config/i18n/i18nForTests';
+import i18n from '@/shared/configs/i18n/i18nForTests';
 
 interface RenderComponentOptions {
   theme?: Theme

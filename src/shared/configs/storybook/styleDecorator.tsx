@@ -1,4 +1,4 @@
 import '@/app/styles/index.scss';
 import { Story } from '@storybook/react';
 
-export const styleDecorator = (story: () => Story) => story();
+export const styleDecorator = (Story: Story) => <Story />;

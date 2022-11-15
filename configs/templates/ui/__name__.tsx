@@ -6,10 +6,15 @@ interface __name__Props {
   className?: string,
 }
 
-export const __name__: FC<__name__Props> = ({ className }) => {
+export const __name__: FC<__name__Props> = (props) => {
+  const {
+    className,
+    children
+  } = props;
 
   return (
-    <div className={classNames(className)}>
+    <div className={classNames(cls.__name__, className)}>
+      {children}
     </div>
   );
 };

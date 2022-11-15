@@ -13,9 +13,6 @@ export const Navbar: FC<NavbarProps> = ({ className }) => {
   const { t } = useTranslation();
 
   return (
-    <nav className={classNames(cls.navbar, className)}>
-      <Link className={classNames(cls.link)} to={RoutesPaths.MAIN}>{t('Главная')}</Link>
-      <Link className={classNames(cls.link)} to={RoutesPaths.ABOUT}>{t('О нас')}</Link>
-    </nav>
+    <nav className={classNames(cls.navbar, className)} />
   );
 };
