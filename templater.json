@@ -1,5 +1,5 @@
 {
-  "templatesPath": "./config/templates",
+  "templatesPath": "./configs/templates",
   "filesCase": "pascal",
   "templates": [
     {
