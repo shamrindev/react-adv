@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { AppRouter } from '@/app/providers/router';
+import { AppRouter } from './providers/AppRouter';
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';
 

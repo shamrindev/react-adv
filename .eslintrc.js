@@ -28,6 +28,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-underscore-dangle': 'off',
     'no-restricted-syntax': 'off',
+    'no-undef': 'off',
+    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state', 'acc'] }],
     'max-len': ['error', { ignoreComments: true, code: 120 }],
     '@typescript-eslint/no-unused-vars': 'warn',
     'import/extensions': 'off',
