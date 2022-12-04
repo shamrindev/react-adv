@@ -10,14 +10,20 @@ interface AppLinkProps extends LinkProps {
 
 export const AppLink: FC<AppLinkProps> = (props) => {
   const {
-    to, className, children, activeClassName,
+    to,
+    className,
+    children,
+    activeClassName = '',
+    ...otherProps
   } = props;
+
   return (
     <NavLink
       to={to}
       className={({ isActive }) => classNames(cls.AppLink, className, {
         [activeClassName]: isActive,
       })}
+      {...otherProps}
     >
       {children}
     </NavLink>

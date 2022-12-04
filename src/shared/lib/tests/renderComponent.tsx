@@ -21,7 +21,7 @@ const TestProvider = ({ children, options }: TextProviderProps) => {
   const {
     theme = Theme.Light,
     initialState = {},
-  } = options;
+  } = options || {};
 
   return (
     <StoreProvider initialState={initialState}>
