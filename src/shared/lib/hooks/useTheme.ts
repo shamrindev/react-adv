@@ -23,6 +23,8 @@ export const useTheme = (): UseThemeResult => {
     bodyClasses.add(theme || getTheme());
   }, [theme]);
 
+  console.log(theme, getTheme());
+
   return {
     theme: theme || getTheme(),
     changeTheme,
