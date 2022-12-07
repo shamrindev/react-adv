@@ -1,22 +1,23 @@
-import React, { Suspense } from 'react';
-import { AppRouter } from './providers/AppRouter';
-import { Navbar } from '@/widgets/Navbar';
-import { Sidebar } from '@/widgets/Sidebar';
+/* eslint-disable i18next/no-literal-string */
+import { useTheme } from "app/providers/ThemeProvider";
+import { Suspense } from "react";
+import { classNames } from "shared/lib/classNames/classNames";
+import { Navbar } from "widgets/Navbar";
+import { Sidebar } from "widgets/Sidebar";
+import { AppRouter } from "./providers/router";
 
-import './styles/index.scss';
 
-function App() {
+export const App = () => {
+  const { theme } = useTheme();
   return (
-    <Suspense fallback="">
-      <div className="app">
+    <div className={classNames("app", {}, [theme])}>
+      <Suspense fallback="">
         <Navbar />
         <div className="content-page">
           <Sidebar />
           <AppRouter />
         </div>
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
-}
-
-export default App;
+};

@@ -8,5 +8,8 @@
         "runtime": "automatic"
       }
     ]
+  ],
+  "plugins": [
+    "i18next-extract"
   ]
 }

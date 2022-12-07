@@ -1,43 +1,41 @@
-import classNames from 'classnames';
-import { ButtonHTMLAttributes, FC } from 'react';
-import cls from './Button.module.scss';
+import { ButtonHTMLAttributes, FC } from "react";
+import { classNames } from "shared/lib/classNames/classNames";
 
-type ButtonVariants = 'outline' | 'filled' | 'clear' | 'ghost';
-type ButtonColors = 'primary' | 'secondary';
-type ButtonSizes = 's' | 'm' | 'l' | 'icon';
+import cls from "./Button.module.scss";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-  className?: string,
-  variant?: ButtonVariants,
-  size?: ButtonSizes,
-  color?: ButtonColors,
-  disabled?: boolean,
-  square?: boolean,
+export enum ButtonTheme {
+  CLEAR = "clear",
+  OUTLINE = "outline",
+  CLEAR_INVERTED="clearInverted",
+  BACKGROUND = "background",
+  BACKGROUND_INVERTED = "backgroundInverted"
 }
 
-export const Button: FC<ButtonProps> = (props) => {
-  const {
-    className,
-    children,
-    variant = 'outline',
-    size = 'm',
-    color = 'primary',
-    disabled,
-    ...otherProps
-  } = props;
+export enum ButtonSize {
+  M = "size_m",
+  L = "size_l",
+  XL = "size_xl"
+}
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+  theme?: ButtonTheme;
+  square?: boolean;
+  size?: ButtonSize
+}
+
+export const Button: FC<ButtonProps> = (props: ButtonProps) => {
+  const { className, children, theme, square, size = ButtonSize.M, ...otherProps } = props;
 
   const mods = {
-    [cls.disabled]: disabled,
-  };
+    [cls[theme]]: true,
+    [cls.square]: square,
+    [cls[size]]: true,
+  }
 
   return (
     <button
-      type="button"
-      className={classNames(cls.Button, className, mods, [
-        cls[variant],
-        cls[size],
-        cls[color],
-      ])}
+      className={classNames(cls.button, mods, [className, cls[theme]])}
       {...otherProps}
     >
       {children}

@@ -1,16 +1,12 @@
-import { FC, ReactNode } from 'react';
-import { createPortal } from 'react-dom';
+import { ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 
 interface PortalProps {
-  children: ReactNode,
-  container?: HTMLElement,
+    children: ReactNode
+    element?: HTMLElement 
 }
 
-export const Portal: FC<PortalProps> = (props) => {
-  const {
-    children,
-    container = document.querySelector('.app') ?? document.body,
-  } = props;
-
-  return createPortal(children, container);
-};
+export const Portal = ({element = document.body,children}:PortalProps) => {
+    
+  return createPortal(children, element)
+}

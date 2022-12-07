@@ -1,34 +1,23 @@
-@import "reset";
-@import "variables/global";
-@import "themes/light";
-@import "themes/dark";
-
-html {
-  font-size: 100%;
-}
+@import "./reset";
+@import "./variables/global";
+@import "./themes/normal";
+@import "./themes/dark";
 
 body {
-  font-family: var(--font-primary);
-  background-color: var(--color-bg-main);
-  color: var(--color-text-main);
-  min-height: 100vh;
+    font: var(--font-m);
+    color: var(--primary-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
+.app {
+    min-height: 100vh;
+    background: var(--bg-color);
 }
 
 .content-page {
-  display: flex;
+    display: flex;
 }
 
 .page-wrapper {
-  flex-grow: 1;
-  padding: 20px;
-  border-top: 1px solid var(--color-bg-accent);
+    flex-grow: 1;
+    padding: 20px;
 }

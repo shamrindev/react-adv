@@ -1,26 +1,32 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/ui/Button';
-import { Modal } from '@/shared/ui/Modal';
-import cls from './Navbar.module.scss';
+import { LoginModal } from "features/AuthByUserName";
+import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { classNames } from "shared/lib/classNames/classNames";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import cls from "./Navbar.module.scss";
 
 interface NavbarProps {
-  className?: string,
+    className?: string;
 }
 
-export const Navbar: FC<NavbarProps> = ({ className }) => {
+export const Navbar = ({ className }: NavbarProps) => {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isAuthModal, setIsAuthModal] = useState(false)
 
-  const onClose = () => {
-    setIsOpen(false);
-  };
-
+  const onCloseModal = useCallback(() => {
+    setIsAuthModal(false)
+  }, [])
+  const onShowModal = useCallback(() => {
+    setIsAuthModal(true)
+  }, [])
   return (
-    <nav className={classNames(cls.navbar, className)}>
-      <Button onClick={() => setIsOpen(true)} variant="ghost">{t('Войти')}</Button>
-      <Modal isOpen={isOpen} onClose={onClose}>{t('Войти')}</Modal>
-    </nav>
+
+    <div className={classNames(cls.navbar, {}, [className])}>
+      <Button theme={ButtonTheme.CLEAR_INVERTED} onClick={onShowModal}>{t("Войти")}</Button>
+      <LoginModal
+        isOpen={isAuthModal}
+        onClose={onCloseModal}
+      />
+    </div>
   );
 };

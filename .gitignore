@@ -1,4 +1,8 @@
+
 .idea
-/node_modules
+package-lock.json
+node_modules
 /build
-/storybook-static
+
+.loki/report.html
+.loki/report.json

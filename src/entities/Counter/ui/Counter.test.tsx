@@ -1,48 +1,26 @@
-import { fireEvent, screen } from '@testing-library/react';
-import { StateSchema } from '@/app/providers/StoreProvider';
-import { renderComponent } from '@/shared/lib/tests/renderComponent';
-import { Counter } from './Counter';
+import {  fireEvent, screen } from "@testing-library/react";
+import { componentRender } from "shared/lib/tests/componentRender/componentRender";
+import { Counter } from "entities/Counter/ui/Counter";
 
-describe('Counter', () => {
-  const initialState: DeepPartial<StateSchema> = {
-    counter: {
-      value: 10,
-    },
-  };
-
-  test('should render counter value', () => {
-    renderComponent(<Counter />, { initialState });
-    const counterValue = screen.getByTestId('value');
-    expect(counterValue).toHaveTextContent('10');
-  });
-
-  test('should increment counter value', () => {
-    renderComponent(<Counter />, { initialState });
-    const incrementButton = screen.getByTestId('increment');
-    const counterValue = screen.getByTestId('value');
-    fireEvent.click(incrementButton);
-    expect(counterValue).toHaveTextContent('11');
-  });
-
-  test('should decrement counter value', () => {
-    renderComponent(<Counter />, { initialState });
-    const decrementButton = screen.getByTestId('decrement');
-    const counterValue = screen.getByTestId('value');
-    fireEvent.click(decrementButton);
-    expect(counterValue).toHaveTextContent('9');
-  });
-
-  test('should add five to counter value', () => {
-    renderComponent(<Counter />, { initialState });
-    const addFiveButton = screen.getByTestId('add-five');
-    const counterValue = screen.getByTestId('value');
-    fireEvent.click(addFiveButton);
-    expect(counterValue).toHaveTextContent('15');
-  });
-
-  test('should render without state', () => {
-    renderComponent(<Counter />);
-    const counterValue = screen.getByTestId('value');
-    expect(counterValue).toHaveTextContent('0');
-  });
+describe("Counter", () => {
+  test("test", () => {
+    componentRender(<Counter />, {
+      initialState:{counter:{value:10}}
+    });
+    expect(screen.getByTestId("value-title")).toHaveTextContent("10");
+  }),
+  test("increment", () => {
+    componentRender(<Counter />, {
+      initialState:{counter:{value:10}}
+    });
+    fireEvent.click(screen.getByTestId("increment-btn"))
+    expect(screen.getByTestId("value-title")).toHaveTextContent("11");
+  }),
+  test("decrement", () => {
+    componentRender(<Counter />, {
+      initialState:{counter:{value:10}}
+    });
+    fireEvent.click(screen.getByTestId("decrement-btn"))
+    expect(screen.getByTestId("value-title")).toHaveTextContent("9");
+  })
 });

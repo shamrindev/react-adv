@@ -1,56 +1,45 @@
-.Modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: var(--duration-default) opacity;
-}
-
-.content {
-  padding: 20px;
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--size-border-radius);
-  z-index: var(--z-index-modal);
-  transform: scale(0.7);
-  transition: var(--duration-default) transform;
-}
-
-.opened {
-  pointer-events: auto;
-  opacity: 1;
-
-  & .content {
-    transform: scale(1);
-  }
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    color: var(--primary-color);
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgb(0 0 0 / 60%);
-  z-index: var(--z-index-overlay);
-  cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  color: var(--color-text-main);
+.content {
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--bg-color);
+    transition: transform 0.3s;
+    transform: scale(0.5);
+    max-width: 60%;
+}
 
-  &:hover {
-    color: var(--color-text-secondary);
-  }
+.opened {
+    pointer-events: auto;
+    opacity: 1;
+    z-index: var(--modal-z-index);
+
+    .content {
+        transform: scale(1);
+    }
+}
+
+.isClosing {
+    .content {
+        transform: scale(0.2);
+    }
 }

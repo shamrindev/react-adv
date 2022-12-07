@@ -1,33 +1,24 @@
-import { FC } from 'react';
-import { Button } from '@/shared/ui/Button';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
-import { counterActions } from '../model/slice/counterSlice';
-import { getCounterValue } from '../model/selectors/getCounterValue/getCounterValue';
+import { useTheme } from 'app/providers/ThemeProvider'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button } from 'shared/ui/Button/Button'
+import { getCounterValue } from '../model/selectors/getCounterValue/getCounterValue'
+import { counterActions } from '../model/slice/CounterSlice'
 
-export const Counter: FC = () => {
-  const dispatch = useAppDispatch();
-  const counterValue = useAppSelector(getCounterValue);
-  const { increment, decrement, incrementByAmount } = counterActions;
+export const Counter = () => {
+  const dispatch = useDispatch()
+  const counterValue = useSelector(getCounterValue)
+  const { theme } = useTheme()
 
-  const onIncrement = () => {
-    dispatch(increment());
-  };
+  const increment = () => {
+    dispatch(counterActions.increment())
+  }
 
-  const onDecrement = () => {
-    dispatch(decrement());
-  };
-
-  const onAddFive = () => {
-    dispatch(incrementByAmount(5));
-  };
-
-  return (
-    <div>
-      <h2 data-testid="value">{counterValue}</h2>
-      <Button onClick={onIncrement} data-testid="increment">+</Button>
-      <Button onClick={onAddFive} data-testid="add-five">+5</Button>
-      <Button onClick={onDecrement} data-testid="decrement">-</Button>
-    </div>
-  );
-};
+  const decrement = () => {
+    dispatch(counterActions.decrement())
+  }
+  return <div>
+    <h1 className={theme} data-testid="value-title">{`value = ${counterValue}`}</h1>
+    <Button data-testid="increment-btn" onClick={increment}>{"incr"}</Button>
+    <Button data-testid="decrement-btn" onClick={decrement}>{"decr"}</Button>
+  </div>
+}

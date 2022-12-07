@@ -1,12 +1,17 @@
 .navbar {
-  display: flex;
-  background-color: var(--color-bg-secondary);
-  height: var(--size-navbar-height);
-  padding: 0 20px;
-  align-items: center;
-  justify-content: flex-end;
+    width: 100%;
+    height: var(--navbar-height);
+    background: var(--inverted-bg-color);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
 }
 
-.link:not(:last-child) {
-  margin-right: 15px;
+.links {
+    margin-left: auto;
+}
+
+.mainLink {
+    margin-right: 15px;
 }
