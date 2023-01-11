@@ -6,3 +6,6 @@ node_modules
 
 .loki/report.html
 .loki/report.json
+extractedTranslations
+extractedTranslations/en/translation.json
+extractedTranslations/ru/translation.json
