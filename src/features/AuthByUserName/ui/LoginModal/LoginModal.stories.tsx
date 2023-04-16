@@ -1,25 +1,26 @@
-import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import AboutPage from './AboutPage'
+import { LoginModal } from './LoginModal'
 import '@/app/styles/index.scss'
 import { ThemeDecorator } from '@/shared/config/storybook/themeDecorator/themeDecorator'
 import { Theme } from '@/app/providers/ThemeProvider'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 
 export default {
-  title: 'pages/AboutPage',
-  component: AboutPage,
-
+  title: 'features/LoginModal',
+  component: LoginModal,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof AboutPage>
+  decorators: [StoreDecorator({})],
+} as ComponentMeta<typeof LoginModal>
 
-const Template: ComponentStory<typeof AboutPage> = () => <AboutPage />
+const Template: ComponentStory<typeof LoginModal> = (args) => (
+  <LoginModal {...args} />
+)
 
 export const Normal = Template.bind({})
-Normal.args = {}
-Normal.decorators = [StoreDecorator({})]
+Normal.args = { isOpen: true, onClose: () => ({}) }
+
 export const Dark = Template.bind({})
-Dark.args = {}
-Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({})]
+Dark.args = { isOpen: true, onClose: () => ({}) }
+Dark.decorators = [ThemeDecorator(Theme.DARK)]
