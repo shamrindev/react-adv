@@ -33,6 +33,7 @@
     // можно писать такой
     // import React from 'react';
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "isolatedModules": true
   },
   "ts-node": {
