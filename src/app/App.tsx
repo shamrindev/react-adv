@@ -4,6 +4,7 @@ import { getUserInited, userActions } from '@/entities/User'
 import { Suspense, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { toggleFeatures } from '@/shared/lib/features'
 import { Navbar } from '@/widgets/Navbar'
 import { Sidebar } from '@/widgets/Sidebar'
 import { AppRouter } from './providers/router'
@@ -17,7 +18,17 @@ export const App = () => {
   }, [dispatch])
 
   return (
-    <div className={classNames('app', {}, [theme])}>
+    <div
+      className={classNames(
+        toggleFeatures({
+          name: 'isAppRedesigned',
+          on: () => 'app_redesigned',
+          off: () => 'app',
+        }),
+        {},
+        [theme],
+      )}
+    >
       <Suspense fallback="">
         <Navbar />
         <div className="content-page">

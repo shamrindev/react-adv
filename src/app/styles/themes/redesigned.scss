@@ -1,0 +1,25 @@
+// dark reddit (default for redesigned)
+.app_redesigned {
+  --bg-redesigned: #0b1416;
+  --bg-surface-redesigned: #10191c;
+  --pill-redesigned: #182226;
+  --accent-up: #ff4500;
+  --accent-down: #7193ff;
+  --text-redesigned: #d7dde0;
+  --text-muted-redesigned: #8ba1ab;
+  --divider-redesigned: rgba(255, 255, 255, 0.08);
+  --radius-pill: 999px;
+
+  background: var(--bg-redesigned);
+  color: var(--text-redesigned);
+}
+
+// light reddit variant (when the light theme class is also present)
+.app_redesigned.app_light_theme {
+  --bg-redesigned: #dae0e6;
+  --bg-surface-redesigned: #ffffff;
+  --pill-redesigned: #f6f7f8;
+  --text-redesigned: #1a1a1b;
+  --text-muted-redesigned: #787c7e;
+  --divider-redesigned: rgba(0, 0, 0, 0.1);
+}
