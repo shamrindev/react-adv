@@ -1,0 +1,20 @@
+.applink {
+  color: var(--accent-up);
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.primary {
+  color: var(--accent-up);
+}
+
+.secondary {
+  color: var(--text-muted-redesigned);
+}
+
+.red {
+  color: var(--accent-up);
+}
