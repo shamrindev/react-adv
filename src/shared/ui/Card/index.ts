@@ -1,1 +1,2 @@
-export * from './Card'
+export { Card, CardTheme } from './Card'
+export type { CardProps } from './Card.types'

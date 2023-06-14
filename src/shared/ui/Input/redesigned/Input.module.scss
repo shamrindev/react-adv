@@ -1,0 +1,35 @@
+.inputWrapper {
+  display: flex;
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-surface-redesigned);
+  border: 1px solid var(--divider-redesigned);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.input {
+  flex-grow: 1;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-redesigned);
+  font: var(--font-m);
+
+  &::placeholder {
+    color: var(--text-muted-redesigned);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.focused {
+  border-color: var(--accent-up);
+}
+
+.readonly {
+  opacity: 0.7;
+}

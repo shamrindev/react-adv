@@ -1,29 +1,14 @@
-import { classNames } from '@/shared/lib/classNames/classNames'
-import cls from './Card.module.scss'
-import { HTMLAttributes, ReactNode } from 'react'
+import { toggleFeatures } from '@/shared/lib/features'
+import { CardProps } from './Card.types'
+import { Card as CardDeprecated } from './deprecated/Card'
+import { Card as CardRedesigned } from './redesigned/Card'
 
-export enum CardTheme {
-  NORMAL = 'normal',
-  OUTLINED = 'outlined',
-}
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string
-  children: ReactNode
-  theme?: CardTheme
-}
+export { CardTheme } from './Card.types'
+export type { CardProps } from './Card.types'
 
-export const Card = ({
-  className,
-  children,
-  theme = CardTheme.NORMAL,
-  ...props
-}: CardProps) => {
-  return (
-    <div
-      {...props}
-      className={classNames(cls.card, {}, [className, cls[theme]])}
-    >
-      {children}
-    </div>
-  )
-}
+export const Card = (props: CardProps) =>
+  toggleFeatures({
+    name: 'isAppRedesigned',
+    on: () => <CardRedesigned {...props} />,
+    off: () => <CardDeprecated {...props} />,
+  })
