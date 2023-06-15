@@ -1,29 +1,13 @@
-import { classNames } from '@/shared/lib/classNames/classNames'
-import cls from './Skeleton.module.scss'
-import { CSSProperties } from 'react'
+import { toggleFeatures } from '@/shared/lib/features'
+import { SkeletonProps } from './Skeleton.types'
+import { Skeleton as SkeletonDeprecated } from './deprecated/Skeleton'
+import { Skeleton as SkeletonRedesigned } from './redesigned/Skeleton'
 
-interface SkeletonProps {
-  className?: string
-  height?: string | number
-  width?: string | number
-  border?: string
-}
+export type { SkeletonProps } from './Skeleton.types'
 
-export const Skeleton = ({
-  className,
-  height,
-  width,
-  border,
-}: SkeletonProps) => {
-  const styles: CSSProperties = {
-    width,
-    height,
-    borderRadius: border,
-  }
-  return (
-    <div
-      className={classNames(cls.skeleton, {}, [className])}
-      style={styles}
-    ></div>
-  )
-}
+export const Skeleton = (props: SkeletonProps) =>
+  toggleFeatures({
+    name: 'isAppRedesigned',
+    on: () => <SkeletonRedesigned {...props} />,
+    off: () => <SkeletonDeprecated {...props} />,
+  })
