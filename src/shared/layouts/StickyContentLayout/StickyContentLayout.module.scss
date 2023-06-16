@@ -1,0 +1,33 @@
+.mainLayout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr) 280px;
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.left,
+.right {
+  position: sticky;
+  top: calc(var(--navbar-height, 60px) + 16px);
+  align-self: start;
+  height: max-content;
+}
+
+.content {
+  min-width: 0;
+}
+
+@media (max-width: 920px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .left,
+  .right {
+    position: static;
+    height: auto;
+  }
+}
