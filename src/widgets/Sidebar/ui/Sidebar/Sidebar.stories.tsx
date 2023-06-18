@@ -6,7 +6,7 @@ import { ThemeDecorator } from '@/shared/config/storybook/themeDecorator/themeDe
 import { Theme } from '@/app/providers/ThemeProvider'
 import { Sidebar } from './Sidebar'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
-import cls from './Sidebar.module.scss'
+import cls from './deprecated/Sidebar.module.scss'
 export default {
   title: 'widget/Sidebar',
   component: Sidebar,
