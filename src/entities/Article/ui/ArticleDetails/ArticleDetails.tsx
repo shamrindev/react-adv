@@ -29,6 +29,8 @@ import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/Articl
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent'
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect'
 import { HStack, VStack } from '@/shared/ui/Stack'
+import { toggleFeatures } from '@/shared/lib/features'
+import { ArticleDetailsRedesigned } from './redesigned/ArticleDetailsRedesigned'
 
 interface ArticleDetailsProps {
   className?: string
@@ -106,30 +108,39 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo(
         />
       )
     } else {
-      content = (
-        <>
-          <HStack justify="center" max>
-            <Avatar src={article?.img} />
-          </HStack>
-          <Text
-            className={cls.title}
-            title={article?.title}
-            text={article?.subtitle}
-            size={TextSize.L}
+      content = toggleFeatures({
+        name: 'isAppRedesigned',
+        on: () => (
+          <ArticleDetailsRedesigned
+            article={article}
+            renderBlock={renderBlock}
           />
-          <VStack gap="4">
-            <HStack gap="8">
-              <Icon Svg={EyeIcon} />
-              <Text text={String(article?.views)} />
+        ),
+        off: () => (
+          <>
+            <HStack justify="center" max>
+              <Avatar src={article?.img} />
             </HStack>
-            <HStack gap="8">
-              <Icon Svg={CalendarIcon} />
-              <Text text={String(article?.createdAt)} />
-            </HStack>
-          </VStack>
-          {article?.blocks.map(renderBlock)}
-        </>
-      )
+            <Text
+              className={cls.title}
+              title={article?.title}
+              text={article?.subtitle}
+              size={TextSize.L}
+            />
+            <VStack gap="4">
+              <HStack gap="8">
+                <Icon Svg={EyeIcon} />
+                <Text text={String(article?.views)} />
+              </HStack>
+              <HStack gap="8">
+                <Icon Svg={CalendarIcon} />
+                <Text text={String(article?.createdAt)} />
+              </HStack>
+            </VStack>
+            {article?.blocks.map(renderBlock)}
+          </>
+        ),
+      })
     }
 
     return (
