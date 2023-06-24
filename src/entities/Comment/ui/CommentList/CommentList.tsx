@@ -4,6 +4,7 @@ import { Comment } from '../../model/types/comment'
 import { useTranslation } from 'react-i18next'
 import { CommentCard } from '../CommentCard/CommentCard'
 import { VStack } from '@/shared/ui/Stack'
+import { toggleFeatures } from '@/shared/lib/features'
 
 interface CommentProps {
   className?: string
@@ -19,9 +20,15 @@ export const CommentList = ({
   const { t } = useTranslation()
   // eslint-disable-next-line i18next/no-literal-string
 
+  const gap = toggleFeatures({
+    name: 'isAppRedesigned',
+    on: () => '4' as const,
+    off: () => '16' as const,
+  })
+
   if (isLoading) {
     return (
-      <VStack gap="16" max className={classNames('', {}, [className])}>
+      <VStack gap={gap} max className={classNames('', {}, [className])}>
         <CommentCard isLoading={true} />
         <CommentCard isLoading={true} />
         <CommentCard isLoading={true} />
@@ -31,7 +38,7 @@ export const CommentList = ({
   return (
     <VStack
       data-testid={'CommentCard.Content'}
-      gap="16"
+      gap={gap}
       max
       className={classNames('', {}, [className])}
     >

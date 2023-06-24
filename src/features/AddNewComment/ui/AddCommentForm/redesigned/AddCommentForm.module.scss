@@ -1,0 +1,14 @@
+.addCommentForm {
+  padding: 12px;
+  background: var(--bg-surface-redesigned);
+  border: 1px solid var(--divider-redesigned);
+  border-radius: 12px;
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.button {
+  flex-shrink: 0;
+}

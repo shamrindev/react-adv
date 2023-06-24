@@ -1,0 +1,75 @@
+.commentCard {
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--divider-redesigned);
+}
+
+.avatarLink {
+  flex-shrink: 0;
+  display: flex;
+}
+
+.avatarFallback {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: var(--divider-redesigned);
+}
+
+.body {
+  min-width: 0;
+}
+
+.meta {
+  flex-wrap: wrap;
+}
+
+.username p {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-redesigned);
+}
+
+.text p {
+  font-size: 14px;
+  color: var(--text-redesigned);
+  word-break: break-word;
+}
+
+.actions {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted-redesigned);
+  user-select: none;
+}
+
+.vote {
+  display: inline-flex;
+}
+
+.voteCount {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted-redesigned);
+}
+
+.upIcon svg {
+  fill: var(--text-muted-redesigned);
+}
+
+.downIcon svg {
+  fill: var(--text-muted-redesigned);
+}
+
+.dot {
+  color: var(--text-muted-redesigned);
+}
+
+.reply {
+  cursor: default;
+  color: var(--text-muted-redesigned);
+}
+
+.loading {
+  border-bottom: none;
+}
