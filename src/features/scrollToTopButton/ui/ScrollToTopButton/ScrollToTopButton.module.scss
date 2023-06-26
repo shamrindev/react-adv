@@ -1,0 +1,31 @@
+.scrollToTopButton {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  cursor: pointer;
+  border: 1px solid var(--divider-redesigned);
+  border-radius: var(--radius-pill);
+  background: var(--pill-redesigned);
+
+  transition: background-color 0.2s, opacity 0.2s;
+
+  &:hover {
+    background: var(--accent-up);
+    opacity: 0.9;
+  }
+}
+
+.icon {
+  fill: var(--text-redesigned);
+  color: var(--text-redesigned);
+}

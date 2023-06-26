@@ -10,6 +10,7 @@ import { memo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { initArticlesPage } from '../../model/services/initArticlesPage'
 import { articlesPageReducer } from '../../model/slice/articlesPageSlice'
+import { ScrollToTopButton } from '@/features/scrollToTopButton'
 import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList'
 import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters'
 import { FiltersContainer } from '../FiltersContainer/FiltersContainer'
@@ -37,6 +38,7 @@ const ArticlesPage = () => {
             data-testid={'ArticlesPage'}
           >
             <ArticleInfiniteList className={cls.list} />
+            <ScrollToTopButton />
           </div>
         }
         right={<FiltersContainer />}
