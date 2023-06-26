@@ -1,0 +1,21 @@
+.profilecard {
+  padding: 24px;
+  background: var(--bg-surface-redesigned);
+  border: 1px solid var(--divider-redesigned);
+  border-radius: 12px;
+}
+
+.label p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted-redesigned);
+}
+
+.loading,
+.error {
+  min-height: 300px;
+}
+
+.error {
+  align-items: center;
+}
