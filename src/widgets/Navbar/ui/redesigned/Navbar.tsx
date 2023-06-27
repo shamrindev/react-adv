@@ -34,6 +34,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     <header className={classNames(cls.navbar, {}, [className])}>
       <HStack gap="8" align="center" className={cls.left}>
         <Icon Svg={BurgerIcon} width={28} height={28} className={cls.burger} />
+        {/* eslint-disable-next-line i18next/no-literal-string */}
         <span className={cls.logo}>artHub</span>
       </HStack>
 

@@ -30,10 +30,14 @@ export const ArticleListItem = ({
 
   const header = (
     <div className={cls.header}>
-      <Avatar size={24} src={article.user.avatar} className={cls.communityAvatar} />
+      <Avatar
+        size={24}
+        src={article.user?.avatar}
+        className={cls.communityAvatar}
+      />
       <Text text={`r/${community}`} className={cls.community} />
       <Text
-        text={`· u/${article.user.username} · ${article.createdAt}`}
+        text={`· u/${article.user?.username ?? ''} · ${article.createdAt}`}
         className={cls.meta}
       />
       <Text text="···" className={cls.dots} />

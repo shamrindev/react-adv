@@ -57,6 +57,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ className }: SidebarProps) => {
                 className={cls.dot}
                 style={{ backgroundColor: community.color }}
               />
+              {/* eslint-disable-next-line i18next/no-literal-string */}
               <span className={cls.communityName}>r/{community.name}</span>
             </AppLink>
           ))}
