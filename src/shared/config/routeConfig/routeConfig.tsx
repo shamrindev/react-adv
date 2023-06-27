@@ -7,6 +7,7 @@ import { ForbiddenPage } from '@/pages/ForbiddenPage'
 import { MainPage } from '@/pages/MainPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { ProfilePage } from '@/pages/profilePage'
+import { SettingsPage } from '@/pages/SettingsPage'
 import {
   AppRoutes,
   getRouteAdmin,
@@ -17,6 +18,7 @@ import {
   getRouteForbidden,
   getRouteMain,
   getRouteProfile,
+  getRouteSettings,
 } from '@/shared/const/router'
 import { RouteProps } from 'react-router-dom'
 
@@ -62,6 +64,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     roles: [UserRole.ADMIN, UserRole.MANAGER],
   },
 
+  [AppRoutes.SETTINGS]: {
+    path: getRouteSettings(),
+    element: <SettingsPage />,
+    authOnly: false,
+  },
   [AppRoutes.FORBIDDEN]: {
     path: getRouteForbidden(),
     element: <ForbiddenPage />,

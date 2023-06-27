@@ -1,6 +1,18 @@
 import { FeatureFlags } from '@/shared/types/featureFlags'
 
-let featureFlags: FeatureFlags = { isAppRedesigned: false }
+function readInitial(): FeatureFlags {
+  try {
+    return {
+      isAppRedesigned: JSON.parse(
+        localStorage.getItem('isAppRedesigned') || 'false'
+      ),
+    }
+  } catch {
+    return { isAppRedesigned: false }
+  }
+}
+
+let featureFlags: FeatureFlags = readInitial()
 
 export function setFeatureFlags(newFlags?: FeatureFlags) {
   if (newFlags) {
