@@ -1,6 +1,7 @@
 import { addDecorator } from '@storybook/react'
 import { RouterDecorator } from '@/shared/config/storybook/RouterDecorator/RouterDecorator'
 import { SuspenseDecorator } from '@/shared/config/storybook/SuspenseDecorator/SuspenseDecorator'
+import { FeatureFlagsDecorator } from '@/shared/config/storybook/FeatureFlagsDecorator/FeatureFlagsDecorator'
 import { Theme } from '@/app/providers/ThemeProvider/index'
 
 export const parameters = {
@@ -30,3 +31,6 @@ addDecorator((StoryComponent) => (
     <StoryComponent />
   </div>
 ))
+// Added last so it is the outermost decorator and resets feature flags
+// from `parameters.features` (defaulting to off) before components render.
+addDecorator(FeatureFlagsDecorator)

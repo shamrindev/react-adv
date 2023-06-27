@@ -103,3 +103,13 @@ Disabled.args = {
   theme: ButtonTheme.OUTLINE,
   disabled: true,
 }
+
+export const Redesigned = Template.bind({})
+Redesigned.args = {
+  children: 'Text',
+}
+Redesigned.parameters = {
+  features: {
+    isAppRedesigned: true,
+  },
+}
