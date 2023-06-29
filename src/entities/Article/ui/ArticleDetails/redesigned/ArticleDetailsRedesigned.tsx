@@ -29,7 +29,9 @@ export const ArticleDetailsRedesigned = ({
         <Avatar size={32} src={article?.user?.avatar} className={cls.avatar} />
         <Text text={`r/${community}`} className={cls.community} />
         <Text
-          text={`· u/${article?.user?.username} · ${article?.createdAt}`}
+          text={`· u/${article?.user?.username ?? ''} · ${
+            article?.createdAt ?? ''
+          }`}
           className={cls.meta}
         />
       </div>
@@ -47,7 +49,7 @@ export const ArticleDetailsRedesigned = ({
             height={18}
             className={cls.upIcon}
           />
-          <Text text={String(article?.views)} className={cls.voteCount} />
+          <Text text={String(article?.views ?? 0)} className={cls.voteCount} />
           <Icon
             Svg={ArrowDownIcon}
             width={18}

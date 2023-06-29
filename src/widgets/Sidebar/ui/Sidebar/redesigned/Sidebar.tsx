@@ -20,7 +20,7 @@ interface CommunityItem {
 const communities: CommunityItem[] = [
   { name: 'IT', color: 'var(--accent-up)' },
   { name: 'SCIENCE', color: 'var(--accent-down)' },
-  { name: 'ECONOMICS', color: '#46d160' },
+  { name: 'ECONOMICS', color: 'var(--accent-positive)' },
 ]
 
 export const Sidebar: FC<SidebarProps> = memo(({ className }: SidebarProps) => {

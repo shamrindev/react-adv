@@ -12,7 +12,6 @@ import { Icon } from '@/shared/ui/Icon'
 import { Input } from '@/shared/ui/Input'
 import { getUserAuthData } from '@/entities/User'
 import { getRouteArticleCreate } from '@/shared/const/router'
-import BurgerIcon from '@/shared/assets/icons/burger.svg'
 import SearchIcon from '@/shared/assets/icons/search.svg'
 import { NavbarProps } from '../deprecated/Navbar'
 import cls from './Navbar.module.scss'
@@ -33,7 +32,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   return (
     <header className={classNames(cls.navbar, {}, [className])}>
       <HStack gap="8" align="center" className={cls.left}>
-        <Icon Svg={BurgerIcon} width={28} height={28} className={cls.burger} />
         {/* eslint-disable-next-line i18next/no-literal-string */}
         <span className={cls.logo}>artHub</span>
       </HStack>
@@ -50,6 +48,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           value={search}
           onChange={setSearch}
           placeholder={t('Поиск статей')}
+          aria-label={t('Поиск статей')}
         />
       </div>
 
