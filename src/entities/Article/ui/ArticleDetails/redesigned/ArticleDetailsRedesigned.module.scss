@@ -5,6 +5,9 @@
   padding: 16px;
   border-radius: 12px;
   background-color: var(--bg-surface-redesigned);
+  max-width: 740px;
+  width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .header {

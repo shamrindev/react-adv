@@ -26,7 +26,7 @@ export const App = () => {
           off: () => 'app',
         }),
         {},
-        [theme],
+        [theme]
       )}
     >
       <Suspense fallback="">

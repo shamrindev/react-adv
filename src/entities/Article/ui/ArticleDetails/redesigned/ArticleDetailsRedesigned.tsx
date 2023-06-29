@@ -26,11 +26,7 @@ export const ArticleDetailsRedesigned = ({
   return (
     <div className={cls.ArticleDetailsRedesigned}>
       <div className={cls.header}>
-        <Avatar
-          size={32}
-          src={article?.user?.avatar}
-          className={cls.avatar}
-        />
+        <Avatar size={32} src={article?.user?.avatar} className={cls.avatar} />
         <Text text={`r/${community}`} className={cls.community} />
         <Text
           text={`· u/${article?.user?.username} · ${article?.createdAt}`}
@@ -61,7 +57,7 @@ export const ArticleDetailsRedesigned = ({
         </div>
         <div className={cls.pill}>
           <Icon Svg={CommentIcon} width={18} height={18} />
-          <Text text={String(article?.views)} className={cls.pillText} />
+          <Text text={t('Обсудить')} className={cls.pillText} />
         </div>
         <div className={cls.pill}>
           <Icon Svg={ShareIcon} width={18} height={18} />

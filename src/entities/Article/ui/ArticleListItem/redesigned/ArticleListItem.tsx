@@ -58,7 +58,7 @@ export const ArticleListItem = ({
       </div>
       <div className={cls.pill}>
         <Icon Svg={CommentIcon} width={18} height={18} />
-        <Text text={String(article.views)} className={cls.pillText} />
+        <Text text={t('Обсудить')} className={cls.pillText} />
       </div>
       <div className={cls.pill}>
         <Icon Svg={ShareIcon} width={18} height={18} />
@@ -71,10 +71,7 @@ export const ArticleListItem = ({
     return (
       <Card
         data-testid={'ArticleListItem'}
-        className={classNames(cls.ArticleListItem, {}, [
-          className,
-          cls[view],
-        ])}
+        className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
       >
         {header}
         <AppLink to={detailsRoute} target={target} className={cls.titleLink}>

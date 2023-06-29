@@ -39,7 +39,12 @@ export const Navbar = memo(({ className }: NavbarProps) => {
       </HStack>
 
       <div className={cls.searchWrapper}>
-        <Icon Svg={SearchIcon} width={18} height={18} className={cls.searchIcon} />
+        <Icon
+          Svg={SearchIcon}
+          width={18}
+          height={18}
+          className={cls.searchIcon}
+        />
         <Input
           className={cls.search}
           value={search}
@@ -51,7 +56,10 @@ export const Navbar = memo(({ className }: NavbarProps) => {
       {authData ? (
         <HStack gap="16" align="center" className={cls.actions}>
           <AppLink to={getRouteArticleCreate()}>
-            <Button theme={ButtonTheme.BACKGROUND_INVERTED} className={cls.createBtn}>
+            <Button
+              theme={ButtonTheme.BACKGROUND_INVERTED}
+              className={cls.createBtn}
+            >
               {t('Создать')}
             </Button>
           </AppLink>
