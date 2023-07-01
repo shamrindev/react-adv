@@ -8,7 +8,7 @@
   --accent-positive: #46d160;
   --text-redesigned: #d7dde0;
   --text-muted-redesigned: #8ba1ab;
-  --divider-redesigned: rgba(255, 255, 255, 0.08);
+  --divider-redesigned: rgb(255 255 255 / 8%);
   --radius-pill: 999px;
 
   background: var(--bg-redesigned);
@@ -18,9 +18,9 @@
 // light reddit variant (when the light theme class is also present)
 .app_redesigned.app_light_theme {
   --bg-redesigned: #dae0e6;
-  --bg-surface-redesigned: #ffffff;
+  --bg-surface-redesigned: #fff;
   --pill-redesigned: #f6f7f8;
   --text-redesigned: #1a1a1b;
   --text-muted-redesigned: #787c7e;
-  --divider-redesigned: rgba(0, 0, 0, 0.1);
+  --divider-redesigned: rgb(0 0 0 / 10%);
 }
