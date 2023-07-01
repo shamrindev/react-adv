@@ -2,6 +2,7 @@ import { useTheme } from '@/app/providers/ThemeProvider'
 import { ReactNode } from 'react'
 import { Mods, classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
+import { getFeatureFlag } from '@/shared/lib/features'
 import { Portal } from '@/shared/ui/Portal'
 import { Overlay } from '../Overlay/Overlay'
 import cls from './Modal.module.scss'
@@ -42,7 +43,12 @@ export const Modal = ({
   return (
     <Portal>
       <div
-        className={classNames(cls.modal, mods, [className, theme, 'app_modal'])}
+        className={classNames(cls.modal, mods, [
+          className,
+          theme,
+          'app_modal',
+          getFeatureFlag('isAppRedesigned') ? 'app_redesigned' : undefined,
+        ])}
       >
         <Overlay onClick={close}>
           <div onClick={(e) => e.stopPropagation()} className={cls.content}>

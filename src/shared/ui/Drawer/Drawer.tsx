@@ -6,6 +6,7 @@ import {
   useAnimationLibs,
 } from '@/shared/lib/components/AnimationProvider'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
+import { getFeatureFlag } from '@/shared/lib/features'
 import { Overlay } from '../Overlay/Overlay'
 import { Portal } from '../Portal/Portal'
 import cls from './Drawer.module.scss'
@@ -100,6 +101,7 @@ export const DrawerContent = ({
           className,
           theme,
           'app_drawer',
+          getFeatureFlag('isAppRedesigned') ? 'app_redesigned' : undefined,
         ])}
       >
         <Overlay onClick={close} />

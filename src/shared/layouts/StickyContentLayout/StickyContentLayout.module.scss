@@ -1,33 +1,44 @@
 .mainLayout {
-  display: grid;
-  grid-template-columns: 210px minmax(0, 1fr) 280px;
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 16px;
 }
 
 .left,
 .right {
+  flex-shrink: 0;
   position: sticky;
   top: calc(var(--navbar-height, 60px) + 16px);
-  align-self: start;
+  align-self: flex-start;
   height: max-content;
 }
 
+.left {
+  width: 210px;
+}
+
+.right {
+  width: 300px;
+}
+
 .content {
+  flex: 1 1 auto;
   min-width: 0;
 }
 
 @media (max-width: 920px) {
   .mainLayout {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .left,
   .right {
     position: static;
     height: auto;
+    width: 100%;
   }
 }

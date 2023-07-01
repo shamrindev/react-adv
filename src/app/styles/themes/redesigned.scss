@@ -10,9 +10,20 @@
   --text-muted-redesigned: #8ba1ab;
   --divider-redesigned: rgb(255 255 255 / 8%);
   --radius-pill: 999px;
+  --font-family-main: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto,
+    'Helvetica Neue', arial, sans-serif;
+
+  // re-derive the composite font tokens at this scope so `font: var(--font-m)`
+  // (used by .app_modal/.app_drawer/etc) picks up the sans family, not the
+  // monospace value baked into these tokens at :root.
+  --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-main);
+  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 
   background: var(--bg-redesigned);
   color: var(--text-redesigned);
+  font-family: var(--font-family-main);
 }
 
 // light reddit variant (when the light theme class is also present)
@@ -23,4 +34,16 @@
   --text-redesigned: #1a1a1b;
   --text-muted-redesigned: #787c7e;
   --divider-redesigned: rgb(0 0 0 / 10%);
+}
+
+// subtle, neutral scrollbar inside redesigned scope (overrides the bright
+// blue/green default thumb that clashes with the dark theme)
+.app_redesigned ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app_redesigned ::-webkit-scrollbar-thumb {
+  background-color: var(--pill-redesigned);
+  border: 3px solid var(--bg-redesigned);
+  border-radius: 999px;
 }
