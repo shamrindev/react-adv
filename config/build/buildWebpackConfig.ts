@@ -13,7 +13,13 @@ export function buildWebpackConfig(
     mode: mode,
     entry: paths.entry,
     output: {
-      filename: '[name].[contenthash].js',
+      // content hashes are for production cache-busting only. In development
+      // they cause `ChunkLoadError`: every rebuild/restart mints new hashes and
+      // `clean: true` removes the old files, so a still-open tab whose HMR
+      // socket dropped (server restart, sleep, network blip) requests a chunk
+      // hash that no longer exists -> 404. Stable dev names always resolve.
+      filename: isDev ? '[name].js' : '[name].[contenthash].js',
+      chunkFilename: isDev ? '[name].js' : '[name].[contenthash].js',
       path: paths.build,
       clean: true,
       publicPath: '/',
