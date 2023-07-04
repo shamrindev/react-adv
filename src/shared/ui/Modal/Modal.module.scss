@@ -25,7 +25,14 @@
 .content {
   padding: 20px;
   border-radius: 12px;
-  background: var(--bg-color);
+
+  // redesigned theme sets these surface vars on the `.app_redesigned` wrapper;
+  // the deprecated theme leaves them unset and falls back to the legacy tokens,
+  // so the navy `--bg-color` panel only changes inside the redesign.
+  background: var(--modal-surface, var(--bg-color));
+  color: var(--modal-text, var(--primary-color));
+  border: 1px solid var(--modal-border, transparent);
+  box-shadow: var(--modal-shadow, none);
   transition: transform 0.3s;
   transform: scale(0.5);
   max-width: 60%;

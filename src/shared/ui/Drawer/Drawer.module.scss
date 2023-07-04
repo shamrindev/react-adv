@@ -39,7 +39,7 @@
   display: block;
   width: 100px;
   height: 10px;
-  background: var(--bg-color);
+  background: var(--modal-border, var(--bg-color));
   margin: auto;
   bottom: 40px;
   border-radius: 12px;
@@ -69,7 +69,10 @@
   height: calc(100vh + 50px);
   width: 96vw;
   border-radius: 12px 12px 0;
-  background: var(--bg-color);
+
+  // redesigned surface (falls back to legacy `--bg-color` in the old theme)
+  background: var(--modal-surface, var(--bg-color));
+  color: var(--modal-text, inherit);
   touch-action: none;
   z-index: 100;
 

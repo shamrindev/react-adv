@@ -21,6 +21,15 @@
   --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
   --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 
+  // surface tokens consumed by portal components (Modal/Drawer) that render
+  // outside this DOM subtree's styling but still inherit these custom
+  // properties via the `.app_redesigned` class on their portal wrapper. The
+  // legacy theme leaves them unset, so those components fall back to `--bg-color`.
+  --modal-surface: var(--bg-surface-redesigned);
+  --modal-text: var(--text-redesigned);
+  --modal-border: var(--divider-redesigned);
+  --modal-shadow: 0 12px 32px rgb(0 0 0 / 45%);
+
   background: var(--bg-redesigned);
   color: var(--text-redesigned);
   font-family: var(--font-family-main);
