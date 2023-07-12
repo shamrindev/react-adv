@@ -1,6 +1,9 @@
 {
-    "Статьи": "Articles",
-    "Статья не найдена": "Article not found",
-    "Произошла ошибка при загрузке страницы": "An error has occured during loading",
-    "Комментарии": "Comments"
+  "Статьи": "Articles",
+  "Статья не найдена": "Article not found",
+  "Произошла ошибка при загрузке страницы": "An error has occured during loading",
+  "Комментарии": "Comments",
+  "Обсудить": "Discuss",
+  "Ошибка загрузки статей": "Failed to load articles",
+  "Поделиться": "Share"
 }
