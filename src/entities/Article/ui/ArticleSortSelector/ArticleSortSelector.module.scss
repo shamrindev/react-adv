@@ -1,5 +1,9 @@
 .articlesortselector {
   display: flex;
   align-items: center;
-  gap: 25px;
+
+  // wrap when the container is narrow (e.g. the 300px redesigned filters rail);
+  // stays a single row in the wide deprecated top bar.
+  flex-wrap: wrap;
+  gap: 16px;
 }

@@ -1,7 +1,16 @@
+.articlespagefilters {
+  width: 100%;
+  min-width: 0;
+}
+
 .sortWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  // allow the sort + view selectors to wrap inside the narrow filters rail
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .search {

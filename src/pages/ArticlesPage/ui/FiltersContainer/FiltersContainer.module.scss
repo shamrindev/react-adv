@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  // let the card (and its flex children) shrink to the rail width instead of
+  // expanding to the filters' min-content width and overflowing off-screen.
+  min-width: 0;
 }
 
 .muted {
