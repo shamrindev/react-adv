@@ -53,6 +53,7 @@ export const ArticleListItem = ({
             alt={article.title}
             className={cls.img}
             fallback={<Skeleton width="100%" height={250} />}
+            errorFallback={<Skeleton width="100%" height={250} />}
           />
           {textBlock && (
             <ArticleTextBlockComponent
@@ -86,6 +87,7 @@ export const ArticleListItem = ({
             alt="article"
             className={cls.img}
             fallback={<Skeleton width={200} height={200} />}
+            errorFallback={<Skeleton width={200} height={200} />}
           />
           <Text text={article.createdAt} className={cls.date} />
         </div>

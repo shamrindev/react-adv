@@ -3,6 +3,7 @@ import ArrowUpIcon from '@/shared/assets/icons/arrow-up.svg'
 import ArrowDownIcon from '@/shared/assets/icons/arrow-down.svg'
 import CommentIcon from '@/shared/assets/icons/comment.svg'
 import ShareIcon from '@/shared/assets/icons/share.svg'
+import ArticleIcon from '@/shared/assets/icons/article-20-20.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { AppLink } from '@/shared/ui/AppLink'
 import { Avatar } from '@/shared/ui/Avatar'
@@ -27,6 +28,13 @@ export const ArticleListItem = ({
 
   const community = article.type?.[0] ?? ''
   const detailsRoute = getRouteArticleDetails(article.id)
+
+  // shown when an article image is missing, 404s, or is a dead 1x1 hotlink
+  const imgPlaceholder = (
+    <div className={cls.imgPlaceholder}>
+      <Icon Svg={ArticleIcon} width={28} height={28} />
+    </div>
+  )
 
   const header = (
     <div className={cls.header}>
@@ -84,6 +92,7 @@ export const ArticleListItem = ({
               alt={article.title}
               className={cls.img}
               fallback={<Skeleton width="100%" height={140} />}
+              errorFallback={imgPlaceholder}
             />
           </AppLink>
         )}
@@ -115,6 +124,7 @@ export const ArticleListItem = ({
             alt={article.title}
             className={cls.img}
             fallback={<Skeleton width="100%" height={250} />}
+            errorFallback={imgPlaceholder}
           />
         </AppLink>
       )}
