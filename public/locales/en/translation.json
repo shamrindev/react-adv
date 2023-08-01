@@ -58,5 +58,13 @@
   "по": "by",
   "убыванию": "descending",
   "Редактор статей в разработке": "The article editor is in development",
-  "Меню": "Menu"
+  "Меню": "Menu",
+  "Редактировать": "Edit",
+  "Комментарии": "Comments",
+  "Статьи не найдены": "Articles not found",
+  "Данные не указаны": "Data not specified",
+  "Имя и фамилия обязательны": "Name and surname are required",
+  "Некорректный возраст": "Incorrect age",
+  "Некорректный регион": "Incorrect region",
+  "Ошибка сервера": "Server error"
 }
