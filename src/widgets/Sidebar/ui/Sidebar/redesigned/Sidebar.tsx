@@ -23,51 +23,63 @@ const communities: CommunityItem[] = [
   { name: 'ECONOMICS', color: 'var(--accent-positive)' },
 ]
 
-export const Sidebar: FC<SidebarProps> = memo(({ className }: SidebarProps) => {
-  const { t } = useTranslation()
-  const sidebarItemsList = useSelector(getSidebarItems)
+export const Sidebar: FC<SidebarProps> = memo(
+  ({ className, isMobileOpen, onClose }: SidebarProps) => {
+    const { t } = useTranslation()
+    const sidebarItemsList = useSelector(getSidebarItems)
 
-  const itemList = useMemo(
-    () =>
-      sidebarItemsList.map((item) => (
-        <SidebarItem key={item.path} item={item} />
-      )),
-    [sidebarItemsList]
-  )
+    const itemList = useMemo(
+      () =>
+        sidebarItemsList.map((item) => (
+          <SidebarItem key={item.path} item={item} />
+        )),
+      [sidebarItemsList]
+    )
 
-  return (
-    <aside
-      data-testid="sidebar"
-      className={classNames(cls.sidebar, {}, [className])}
-    >
-      <VStack role="navigation" gap="4" max className={cls.nav}>
-        {itemList}
-      </VStack>
+    return (
+      <>
+        {isMobileOpen && <div className={cls.overlay} onClick={onClose} />}
+        <aside
+          data-testid="sidebar"
+          className={classNames(
+            cls.sidebar,
+            { [cls.mobileOpen]: isMobileOpen },
+            [className]
+          )}
+          // a tap on a nav link should dismiss the mobile drawer; the switchers
+          // below stop propagation so toggling theme/lang keeps it open
+          onClick={onClose}
+        >
+          <VStack role="navigation" gap="4" max className={cls.nav}>
+            {itemList}
+          </VStack>
 
-      <div className={cls.section}>
-        <span className={cls.sectionLabel}>{t('СООБЩЕСТВА')}</span>
-        <VStack gap="4" max>
-          {communities.map((community) => (
-            <AppLink
-              key={community.name}
-              to={getRouteArticles()}
-              className={cls.community}
-            >
-              <span
-                className={cls.dot}
-                style={{ backgroundColor: community.color }}
-              />
-              {/* eslint-disable-next-line i18next/no-literal-string */}
-              <span className={cls.communityName}>r/{community.name}</span>
-            </AppLink>
-          ))}
-        </VStack>
-      </div>
+          <div className={cls.section}>
+            <span className={cls.sectionLabel}>{t('СООБЩЕСТВА')}</span>
+            <VStack gap="4" max>
+              {communities.map((community) => (
+                <AppLink
+                  key={community.name}
+                  to={getRouteArticles()}
+                  className={cls.community}
+                >
+                  <span
+                    className={cls.dot}
+                    style={{ backgroundColor: community.color }}
+                  />
+                  {/* eslint-disable-next-line i18next/no-literal-string */}
+                  <span className={cls.communityName}>r/{community.name}</span>
+                </AppLink>
+              ))}
+            </VStack>
+          </div>
 
-      <div className={cls.switchers}>
-        <ThemeSwitcher />
-        <LangSwitcher className={cls.lang} />
-      </div>
-    </aside>
-  )
-})
+          <div className={cls.switchers} onClick={(e) => e.stopPropagation()}>
+            <ThemeSwitcher />
+            <LangSwitcher className={cls.lang} />
+          </div>
+        </aside>
+      </>
+    )
+  }
+)

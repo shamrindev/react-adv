@@ -1,7 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { useTheme } from '@/app/providers/ThemeProvider'
 import { getUserInited, userActions } from '@/entities/User'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { toggleFeatures } from '@/shared/lib/features'
@@ -13,6 +13,11 @@ export const App = () => {
   const { theme } = useTheme()
   const dispatch = useDispatch()
   const inited = useSelector(getUserInited)
+  // mobile sidebar (off-canvas) open state, lifted here so the Navbar burger
+  // and the Sidebar drawer share it
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const openSidebar = useCallback(() => setIsSidebarOpen(true), [])
+  const closeSidebar = useCallback(() => setIsSidebarOpen(false), [])
   useEffect(() => {
     dispatch(userActions.initAuthData())
   }, [dispatch])
@@ -30,9 +35,9 @@ export const App = () => {
       )}
     >
       <Suspense fallback="">
-        <Navbar />
+        <Navbar onOpenSidebar={openSidebar} />
         <div className="content-page">
-          <Sidebar />
+          <Sidebar isMobileOpen={isSidebarOpen} onClose={closeSidebar} />
           {inited && <AppRouter />}
         </div>
       </Suspense>

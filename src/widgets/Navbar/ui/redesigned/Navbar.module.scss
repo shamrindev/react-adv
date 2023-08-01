@@ -17,7 +17,15 @@
 }
 
 .burger {
-  color: var(--text-muted-redesigned);
+  // hidden on desktop (the static sidebar is visible there)
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-redesigned);
 }
 
 .logo {
@@ -58,4 +66,15 @@
 
 .createBtn {
   white-space: nowrap;
+}
+
+// mobile: show the burger, hide the (non-functional) search input
+@media (max-width: 768px) {
+  .burger {
+    display: inline-flex;
+  }
+
+  .searchWrapper {
+    display: none;
+  }
 }

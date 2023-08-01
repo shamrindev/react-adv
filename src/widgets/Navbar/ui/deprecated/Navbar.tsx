@@ -15,6 +15,8 @@ import { getRouteArticleCreate } from '@/shared/const/router'
 
 export interface NavbarProps {
   className?: string
+  /** opens the mobile off-canvas sidebar (redesigned shell only) */
+  onOpenSidebar?: () => void
 }
 
 export const Navbar = memo(({ className }: NavbarProps) => {

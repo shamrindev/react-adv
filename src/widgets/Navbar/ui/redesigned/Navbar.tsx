@@ -13,10 +13,11 @@ import { Input } from '@/shared/ui/Input'
 import { getUserAuthData } from '@/entities/User'
 import { getRouteArticleCreate } from '@/shared/const/router'
 import SearchIcon from '@/shared/assets/icons/search.svg'
+import BurgerIcon from '@/shared/assets/icons/burger.svg'
 import { NavbarProps } from '../deprecated/Navbar'
 import cls from './Navbar.module.scss'
 
-export const Navbar = memo(({ className }: NavbarProps) => {
+export const Navbar = memo(({ className, onOpenSidebar }: NavbarProps) => {
   const { t } = useTranslation('translation')
   const [isAuthModal, setIsAuthModal] = useState(false)
   const [search, setSearch] = useState('')
@@ -32,6 +33,14 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   return (
     <header className={classNames(cls.navbar, {}, [className])}>
       <HStack gap="8" align="center" className={cls.left}>
+        <button
+          type="button"
+          className={cls.burger}
+          onClick={onOpenSidebar}
+          aria-label={t('Меню')}
+        >
+          <Icon Svg={BurgerIcon} width={24} height={24} />
+        </button>
         {/* eslint-disable-next-line i18next/no-literal-string */}
         <span className={cls.logo}>artHub</span>
       </HStack>

@@ -86,6 +86,9 @@
 .footer {
   display: flex;
   align-items: center;
+
+  // wrap to a second row on narrow cards instead of clipping the last pill
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 4px;
 }
@@ -96,7 +99,7 @@
   align-items: center;
   gap: 6px;
   height: 32px;
-  padding: 0 12px;
+  padding: 0 10px;
   border-radius: var(--radius-pill);
   background-color: var(--pill-redesigned);
   color: var(--text-muted-redesigned);

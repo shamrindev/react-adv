@@ -79,3 +79,30 @@
 .storybookHeight {
   height: 100vh;
 }
+
+// --- mobile: off-canvas drawer toggled by the navbar burger ---
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: min(82vw, 320px);
+    z-index: 9;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 24px rgb(0 0 0 / 45%);
+  }
+
+  .sidebar.mobileOpen {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    position: fixed;
+    inset: var(--navbar-height) 0 0;
+    z-index: 8;
+    background: rgb(0 0 0 / 50%);
+  }
+}

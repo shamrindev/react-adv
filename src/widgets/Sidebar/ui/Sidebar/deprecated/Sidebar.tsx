@@ -11,6 +11,9 @@ import { VStack } from '@/shared/ui/Stack'
 
 export interface SidebarProps {
   className?: string
+  /** controls the mobile off-canvas drawer (redesigned shell only) */
+  isMobileOpen?: boolean
+  onClose?: () => void
 }
 
 export const Sidebar: FC<SidebarProps> = memo(({ className }: SidebarProps) => {
