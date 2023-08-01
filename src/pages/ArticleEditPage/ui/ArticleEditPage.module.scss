@@ -1,3 +1,19 @@
 .articleeditpage {
   width: 100%;
 }
+
+.empty {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  text-align: center;
+}
+
+.icon {
+  color: var(--text-muted-redesigned, #8ba1ab);
+  opacity: 0.6;
+}
+
+.muted {
+  opacity: 0.7;
+}
