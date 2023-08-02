@@ -1,12 +1,13 @@
 .sidebar {
   height: calc(100vh - var(--navbar-height));
-  width: var(--sidebar-width);
+  width: 270px;
+  flex-shrink: 0;
   background: var(--bg-redesigned);
   border-right: 1px solid var(--divider-redesigned);
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 12px 8px;
+  padding: 16px 12px;
   box-sizing: border-box;
 }
 

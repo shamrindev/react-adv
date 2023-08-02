@@ -3,7 +3,7 @@ import cls from './NotificationButton.module.scss'
 
 import { NotificationList } from '@/entities/Notification'
 import { Icon } from '@/shared/ui/Icon'
-import NotificationsIcon from '@/shared/assets/icons/notification-20-20.svg'
+import NotificationsIcon from '@/shared/assets/icons/bell.svg'
 import { Popover } from '@/shared/ui/Popups'
 import { BrowserView, MobileView } from 'react-device-detect'
 import { Drawer } from '@/shared/ui/Drawer'
@@ -28,6 +28,8 @@ export const NotificationButton = ({
   const trigger = (
     <Icon
       Svg={NotificationsIcon}
+      width={22}
+      height={22}
       clickable
       onClick={onOpenDrawer}
       className={cls.trigger}

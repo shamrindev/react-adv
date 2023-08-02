@@ -21,3 +21,41 @@
     width: 0;
   }
 }
+
+// Reddit-like row for the redesigned sidebar: outline icon, comfortable
+// height, hover pill, active-route highlight
+.redesigned {
+  margin-top: 0;
+  gap: 12px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: var(--text-redesigned);
+  transition: background 0.15s ease;
+
+  .icon {
+    fill: none;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--text-muted-redesigned);
+  }
+
+  .link {
+    margin-left: 0;
+    font-size: 14px;
+  }
+
+  &:hover {
+    background: var(--pill-redesigned);
+  }
+
+  &.active {
+    background: var(--pill-redesigned);
+    font-weight: 600;
+
+    .icon {
+      color: var(--text-redesigned);
+    }
+  }
+}

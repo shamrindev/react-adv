@@ -31,7 +31,7 @@ export const Sidebar: FC<SidebarProps> = memo(
     const itemList = useMemo(
       () =>
         sidebarItemsList.map((item) => (
-          <SidebarItem key={item.path} item={item} />
+          <SidebarItem key={item.path} item={item} redesigned />
         )),
       [sidebarItemsList]
     )
