@@ -41,7 +41,10 @@
   --bg-surface-redesigned: #fff;
   --pill-redesigned: #f6f7f8;
   --text-redesigned: #1a1a1b;
-  --text-muted-redesigned: #787c7e;
+
+  // darkened from #787c7e so muted/body text meets WCAG AA (>=4.5:1) on the
+  // white surface; #6a6d6f is ~4.9:1
+  --text-muted-redesigned: #6a6d6f;
   --divider-redesigned: rgb(0 0 0 / 10%);
 }
 
