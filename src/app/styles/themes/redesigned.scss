@@ -30,6 +30,14 @@
   --modal-border: var(--divider-redesigned);
   --modal-shadow: 0 12px 32px rgb(0 0 0 / 45%);
 
+  // the redesigned theme never defined --primary-color / --inverted-primary-color,
+  // so shared components that rely on them (Icon's default fill, the sidebar
+  // item icons) fell back to the deprecated theme's neon green/blue. Map them to
+  // the redesigned foreground so the icon set is a consistent monochrome (the
+  // orange logo, vote arrows and links keep their own accent overrides).
+  --primary-color: var(--text-redesigned);
+  --inverted-primary-color: var(--text-redesigned);
+
   background: var(--bg-redesigned);
   color: var(--text-redesigned);
   font-family: var(--font-family-main);
