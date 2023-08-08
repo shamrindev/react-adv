@@ -3,12 +3,14 @@ import { FeatureFlags } from '@/shared/types/featureFlags'
 function readInitial(): FeatureFlags {
   try {
     return {
+      // the modern Reddit-style UI is the default; the legacy design stays
+      // available via the toggle in Settings (which persists this key)
       isAppRedesigned: JSON.parse(
-        localStorage.getItem('isAppRedesigned') || 'false'
+        localStorage.getItem('isAppRedesigned') || 'true'
       ),
     }
   } catch {
-    return { isAppRedesigned: false }
+    return { isAppRedesigned: true }
   }
 }
 
