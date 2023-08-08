@@ -42,7 +42,7 @@ const mockArticle: Article = {
 export const createArticle = (article?: Article) => {
   cy.request({
     method: 'POST',
-    url: `http://localhost:8000/articles`,
+    url: `http://localhost:8003/articles`,
     headers: { Authorization: 'random_text' },
     body: article ?? mockArticle,
   }).then(({ body }) => body)
@@ -51,7 +51,7 @@ export const createArticle = (article?: Article) => {
 export const removeArticle = (articleId: string) => {
   cy.request({
     method: 'DELETE',
-    url: `http://localhost:8000/articles/${articleId}`,
+    url: `http://localhost:8003/articles/${articleId}`,
     headers: { Authorization: 'random_text' },
   })
 }

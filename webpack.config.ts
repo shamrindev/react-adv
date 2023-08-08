@@ -10,7 +10,7 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
   if (mode === 'production') {
     return 'https://api.react-adv.example'
   }
-  return 'http://localhost:8000'
+  return 'http://localhost:8003'
 }
 
 export default (env: BuildEnv) => {
@@ -24,7 +24,7 @@ export default (env: BuildEnv) => {
   }
 
   const mode = env?.mode || 'development'
-  const PORT = env?.port || 3000
+  const PORT = env?.port || 3003
   const apiUrl = getApiUrl(mode, env?.apiUrl)
   const isDev = mode === 'development'
 

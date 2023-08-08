@@ -60,7 +60,8 @@ server.use((req, res, next) => {
 
 server.use(router)
 const PORT = 8443
-const HTTP_PORT = 8000
+// 8003 instead of the common 8000, which is often taken by other local apps
+const HTTP_PORT = 8003
 const httpsServer = https.createServer(options, server)
 const httpServer = http.createServer(server)
 // запуск сервера

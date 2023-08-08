@@ -6,7 +6,7 @@ import { selectByTestId } from '../../helpers/selectByTestId'
 export const login = (username = 'test_user', password = '123') => {
   cy.request({
     method: 'POST',
-    url: 'http://localhost:8000/login',
+    url: 'http://localhost:8003/login',
     body: {
       username,
       password,

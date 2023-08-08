@@ -6,7 +6,7 @@
   "homepage": "https://github.com/Ch4m4/react-adv",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --env port=3000",
+    "start": "webpack serve --env port=3003",
     "start:vite": "vite",
     "start:dev": "concurrently \"npm:start\" \"npm run start:dev:server\"",
     "start:dev:vite": "concurrently \"npm run start:vite\" \"npm run start:dev:server\"",

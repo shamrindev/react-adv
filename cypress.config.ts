@@ -5,12 +5,12 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: 'http://localhost:3000/',
+    baseUrl: 'http://localhost:3003/',
   },
   env: {
     mode: 'development',
-    PORT: 3000,
-    apiUrl: 'http://localhost:3000/',
+    PORT: 3003,
+    apiUrl: 'http://localhost:3003/',
   },
   component: {
     devServer: {
