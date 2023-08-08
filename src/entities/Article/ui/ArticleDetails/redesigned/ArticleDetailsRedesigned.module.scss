@@ -21,6 +21,7 @@
 }
 
 .community p {
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-redesigned);
   white-space: nowrap;
@@ -28,7 +29,7 @@
 
 .meta p {
   color: var(--text-muted-redesigned);
-  font-size: 13px;
+  font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -74,23 +75,32 @@
   padding: 0 10px;
 }
 
-.upIcon svg {
+// the Icon class lands on the <svg> itself; target it directly and outrank
+// Icon's own fill
+.votePill .upIcon {
   fill: var(--accent-up);
 }
 
-.downIcon svg {
+.votePill .downIcon {
   fill: var(--accent-down);
 }
 
 .voteCount p,
 .pillText p {
   color: var(--text-redesigned);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .blocks {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+
+  // reading rhythm for post body paragraphs
+  p {
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
 }
