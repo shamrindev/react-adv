@@ -1,13 +1,13 @@
 .BIG {
-  .card {
-    margin-bottom: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .SMALL {
   max-width: 1200px;
   display: flex;
-  gap: 30px;
+  gap: 16px;
 
   &.wrap {
     flex-wrap: wrap;
@@ -19,11 +19,11 @@
 
   .card {
     display: inline-flex;
-    height: 300px;
+    min-height: 300px;
   }
 
   .row {
     display: flex;
-    gap: 30px;
+    gap: 16px;
   }
 }

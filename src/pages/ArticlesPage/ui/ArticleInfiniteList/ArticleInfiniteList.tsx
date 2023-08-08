@@ -18,11 +18,15 @@ import { ArticleVirtualList } from '../ArticleVirtualList/ArticleVirtualList'
 
 interface ArticleInfiniteListProps {
   className?: string
+  /** class for the inner ArticleList; defaults to className (the legacy
+   * behaviour applied the same class to both the Page wrapper and the list) */
+  listClassName?: string
   virtual?: boolean
 }
 
 export const ArticleInfiniteList = ({
   className,
+  listClassName,
   virtual = false,
 }: ArticleInfiniteListProps) => {
   const articles = useSelector(getArticles.selectAll)
@@ -50,7 +54,7 @@ export const ArticleInfiniteList = ({
           articles={articles}
           isLoading={isLoading}
           view={view}
-          className={className}
+          className={listClassName ?? className}
         />
       </Page>
     )

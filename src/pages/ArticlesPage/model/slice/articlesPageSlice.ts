@@ -10,6 +10,7 @@ import { fetchArticlesList } from '../services/fetchArticleList'
 import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from '@/shared/const/localstorage'
 import { ArticleSortField, ArticleType } from '../../../../entities/Article'
 import { SortOrder } from '@/shared/types'
+import { toggleFeatures } from '@/shared/lib/features'
 
 const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article: Article) => article.id,
@@ -61,9 +62,19 @@ const articlesPageSlice = createSlice({
       state.type = action.payload
     },
     initState: (state) => {
-      const view = (state.view = localStorage.getItem(
+      // saved user preference wins; otherwise the redesigned (Reddit-like)
+      // feed defaults to the single-column card view, the old design to tiles.
+      // Previously an empty localStorage left view = null here.
+      const saved = localStorage.getItem(
         ARTICLE_VIEW_LOCALSTORAGE_KEY
-      ) as ArticleView)
+      ) as ArticleView | null
+      const view =
+        saved ??
+        toggleFeatures({
+          name: 'isAppRedesigned',
+          on: () => ArticleView.BIG,
+          off: () => ArticleView.SMALL,
+        })
       state.view = view
       state.limit = view === ArticleView.BIG ? 4 : 8
       state._inited = true

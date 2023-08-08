@@ -37,7 +37,10 @@ const ArticlesPage = () => {
             className={cls.articlePageRedesigned}
             data-testid={'ArticlesPage'}
           >
-            <ArticleInfiniteList className={cls.list} />
+            <ArticleInfiniteList
+              className={cls.listRedesigned}
+              listClassName={cls.cards}
+            />
             <ScrollToTopButton />
           </div>
         }
