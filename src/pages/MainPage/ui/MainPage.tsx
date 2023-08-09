@@ -114,14 +114,6 @@ const MainPage = memo(() => {
                     >
                       <GitHubIcon width={26} height={26} />
                     </a>
-                    <a
-                      href="https://github.com/Ch4m4/react-adv"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Storybook"
-                    >
-                      <StorybookIcon width={26} height={26} />
-                    </a>
                   </HStack>
                 </VStack>
               </Card>

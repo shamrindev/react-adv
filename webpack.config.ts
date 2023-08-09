@@ -4,10 +4,12 @@ import { buildWebpackConfig } from './config/build/buildWebpackConfig'
 import { BuildEnv, BuildMode, BuildPaths } from './config/build/types/config'
 
 function getApiUrl(mode: BuildMode, apiUrl?: string) {
-  // if (apiUrl) {
-  //   return apiUrl
-  // }
+  // override at build time: `webpack --env apiUrl=https://...`
+  if (apiUrl) {
+    return apiUrl
+  }
   if (mode === 'production') {
+    // set your production API url here, or pass --env apiUrl=...
     return 'https://api.react-adv.example'
   }
   return 'http://localhost:8003'
