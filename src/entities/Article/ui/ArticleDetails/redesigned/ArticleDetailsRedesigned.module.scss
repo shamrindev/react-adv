@@ -76,13 +76,13 @@
 }
 
 // the Icon class lands on the <svg> itself; target it directly and outrank
-// Icon's own fill
+// Icon's own colour. arrows are outline (stroke: currentColor) -> colour them
 .votePill .upIcon {
-  fill: var(--accent-up);
+  color: var(--accent-up);
 }
 
 .votePill .downIcon {
-  fill: var(--accent-down);
+  color: var(--accent-down);
 }
 
 .voteCount p,
