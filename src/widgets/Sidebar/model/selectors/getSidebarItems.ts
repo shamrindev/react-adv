@@ -26,6 +26,12 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
       text: 'Главная',
     },
     {
+      path: getRouteArticles(),
+      Icon: ArticleIcon,
+      IconRedesigned: FeedIconRedesigned,
+      text: 'Статьи',
+    },
+    {
       path: getRouteSettings(),
       Icon: SettingsIcon,
       IconRedesigned: SettingsIconRedesigned,
@@ -33,22 +39,13 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
     },
   ]
   if (userData) {
-    sidebarItemList.push(
-      {
-        path: getRouteProfile(userData?.id),
-        Icon: ProfileIcon,
-        IconRedesigned: UserIconRedesigned,
-        text: 'Профиль',
-        authOnly: true,
-      },
-      {
-        path: getRouteArticles(),
-        Icon: ArticleIcon,
-        IconRedesigned: FeedIconRedesigned,
-        text: 'Статьи',
-        authOnly: true,
-      }
-    )
+    sidebarItemList.push({
+      path: getRouteProfile(userData?.id),
+      Icon: ProfileIcon,
+      IconRedesigned: UserIconRedesigned,
+      text: 'Профиль',
+      authOnly: true,
+    })
   }
   return sidebarItemList
 })

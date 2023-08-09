@@ -40,12 +40,14 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.ARTICLES]: {
     path: getRouteArticles(),
     element: <ArticlesPage />,
-    authOnly: true,
+    // public: guests can browse the feed; creating/editing still needs auth
+    authOnly: false,
   },
   [AppRoutes.ARTICLE_DETAILS]: {
     path: getRouteArticleDetails(':id'),
     element: <ArticleDetailsPage />,
-    authOnly: true,
+    // public: guests can read an article (rating/comments still need auth)
+    authOnly: false,
   },
   [AppRoutes.ARTICLE_CREATE]: {
     path: getRouteArticleCreate(),

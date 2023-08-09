@@ -48,10 +48,12 @@ server.post('/login', (req, res) => {
   }
 })
 
-// проверяем, авторизован ли пользователь
+// проверяем, авторизован ли пользователь.
+// чтение (GET) доступно всем — гость может просматривать статьи;
+// для изменений (POST/PUT/PATCH/DELETE) по-прежнему нужна авторизация
 // eslint-disable-next-line
 server.use((req, res, next) => {
-  if (!req.headers.authorization) {
+  if (req.method !== 'GET' && !req.headers.authorization) {
     return res.status(403).json({ message: 'AUTH ERROR' })
   }
 
