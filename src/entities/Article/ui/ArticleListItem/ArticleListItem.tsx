@@ -1,11 +1,11 @@
-import { toggleFeatures } from '@/shared/lib/features'
+import { memo } from 'react'
 import { ArticleListItemProps } from './ArticleListItem.types'
-import { ArticleListItem as ArticleListItemDeprecated } from './deprecated/ArticleListItem'
 import { ArticleListItem as ArticleListItemRedesigned } from './redesigned/ArticleListItem'
 
-export const ArticleListItem = (props: ArticleListItemProps) =>
-  toggleFeatures({
-    name: 'isAppRedesigned',
-    on: () => <ArticleListItemRedesigned {...props} />,
-    off: () => <ArticleListItemDeprecated {...props} />,
-  })
+// memoized: a feed renders many rows under a parent that re-renders often
+// (scroll/filters); per-item props are stable, so memo skips the subtree
+export const ArticleListItem = memo((props: ArticleListItemProps) => (
+  <ArticleListItemRedesigned {...props} />
+))
+
+ArticleListItem.displayName = 'ArticleListItem'

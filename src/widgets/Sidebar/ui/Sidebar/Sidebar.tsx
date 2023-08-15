@@ -1,13 +1,6 @@
-import { toggleFeatures } from '@/shared/lib/features'
 import {
-  Sidebar as SidebarDeprecated,
+  Sidebar as SidebarRedesigned,
   SidebarProps,
-} from './deprecated/Sidebar'
-import { Sidebar as SidebarRedesigned } from './redesigned/Sidebar'
+} from './redesigned/Sidebar'
 
-export const Sidebar = (props: SidebarProps) =>
-  toggleFeatures({
-    name: 'isAppRedesigned',
-    on: () => <SidebarRedesigned {...props} />,
-    off: () => <SidebarDeprecated {...props} />,
-  })
+export const Sidebar = (props: SidebarProps) => <SidebarRedesigned {...props} />

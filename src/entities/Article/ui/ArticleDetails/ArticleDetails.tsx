@@ -10,27 +10,22 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice'
 import cls from './ArticleDetails.module.scss'
 import { useSelector } from 'react-redux'
-import { Text, TextAlign, TextSize } from '@/shared/ui/Text'
+import { Text, TextAlign } from '@/shared/ui/Text'
 import {
   getArticleDetailsData,
   getArticleDetailsError,
   getArticleDetailsIsLoading,
 } from '../../model/selectors/articleDetails'
 import { TextTheme } from '@/shared/ui/Text'
-import { Skeleton } from '@/shared/ui/Skeleton'
-import { Avatar } from '@/shared/ui/Avatar'
-import EyeIcon from '@/shared/assets/icons/eye-20-20.svg'
-import CalendarIcon from '@/shared/assets/icons/calendar-20-20.svg'
-import { Icon } from '@/shared/ui/Icon'
 import { ArticleBlock } from '../../model/types/article'
 import { ArticleBlockType } from '../../model/consts/consts'
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent'
 import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent'
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent'
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect'
-import { HStack, VStack } from '@/shared/ui/Stack'
-import { toggleFeatures } from '@/shared/lib/features'
+import { VStack } from '@/shared/ui/Stack'
 import { ArticleDetailsRedesigned } from './redesigned/ArticleDetailsRedesigned'
+import { ArticleDetailsSkeletonRedesigned } from './redesigned/ArticleDetailsSkeleton'
 
 interface ArticleDetailsProps {
   className?: string
@@ -85,20 +80,7 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo(
 
     let content
     if (isLoading) {
-      content = (
-        <div>
-          <Skeleton
-            className={cls.avatar}
-            width={200}
-            height={200}
-            border={'50%'}
-          />
-          <Skeleton className={cls.title} width={300} height={32} />
-          <Skeleton className={cls.skeleton} width={600} height={24} />
-          <Skeleton className={cls.skeleton} width={'100%'} height={200} />
-          <Skeleton className={cls.skeleton} width={'100%'} height={200} />
-        </div>
-      )
+      content = <ArticleDetailsSkeletonRedesigned />
     } else if (error) {
       content = (
         <Text
@@ -108,39 +90,9 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo(
         />
       )
     } else {
-      content = toggleFeatures({
-        name: 'isAppRedesigned',
-        on: () => (
-          <ArticleDetailsRedesigned
-            article={article}
-            renderBlock={renderBlock}
-          />
-        ),
-        off: () => (
-          <>
-            <HStack justify="center" max>
-              <Avatar src={article?.img} />
-            </HStack>
-            <Text
-              className={cls.title}
-              title={article?.title}
-              text={article?.subtitle}
-              size={TextSize.L}
-            />
-            <VStack gap="4">
-              <HStack gap="8">
-                <Icon Svg={EyeIcon} />
-                <Text text={String(article?.views)} />
-              </HStack>
-              <HStack gap="8">
-                <Icon Svg={CalendarIcon} />
-                <Text text={String(article?.createdAt)} />
-              </HStack>
-            </VStack>
-            {article?.blocks.map(renderBlock)}
-          </>
-        ),
-      })
+      content = (
+        <ArticleDetailsRedesigned article={article} renderBlock={renderBlock} />
+      )
     }
 
     return (

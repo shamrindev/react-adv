@@ -4,13 +4,16 @@ import {
   createSlice,
 } from '@reduxjs/toolkit'
 import { StateSchema } from '@/app/providers/StoreProvider'
-import { Article, ArticleView } from '../../../../entities/Article'
+import {
+  Article,
+  ArticleView,
+  ArticleSortField,
+  ArticleType,
+} from '@/entities/Article'
 import { ArticlesPageSchema } from '../types/articlesPageSchema'
 import { fetchArticlesList } from '../services/fetchArticleList'
 import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from '@/shared/const/localstorage'
-import { ArticleSortField, ArticleType } from '../../../../entities/Article'
 import { SortOrder } from '@/shared/types'
-import { toggleFeatures } from '@/shared/lib/features'
 
 const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article: Article) => article.id,
@@ -31,8 +34,11 @@ const articlesPageSlice = createSlice({
     page: 1,
     limit: 8,
     hasMore: true,
-    sort: ArticleSortField.CREATED,
-    order: 'asc',
+    // default to most-viewed first: it gives a "popular/hot" feed (like the
+    // home page) and, unlike CREATED, the `views` field actually matches a
+    // json-server column so the sort takes effect.
+    sort: ArticleSortField.VIEWS,
+    order: 'desc',
     search: '',
     type: ArticleType.ALL,
     _inited: false,
@@ -68,13 +74,9 @@ const articlesPageSlice = createSlice({
       const saved = localStorage.getItem(
         ARTICLE_VIEW_LOCALSTORAGE_KEY
       ) as ArticleView | null
-      const view =
-        saved ??
-        toggleFeatures({
-          name: 'isAppRedesigned',
-          on: () => ArticleView.BIG,
-          off: () => ArticleView.SMALL,
-        })
+      // saved user preference wins; otherwise the redesigned feed defaults to
+      // the single-column card (BIG) view.
+      const view = saved ?? ArticleView.BIG
       state.view = view
       state.limit = view === ArticleView.BIG ? 4 : 8
       state._inited = true
@@ -90,18 +92,14 @@ const articlesPageSlice = createSlice({
         }
       })
       .addCase(fetchArticlesList.fulfilled, (state, action) => {
-        if (
-          Number(action.payload.headers['x-total-count']) <
-          state.page * state.limit
-        ) {
+        if (action.payload.total < state.page * state.limit) {
           state.hasMore = false
         }
         state.isLoading = false
-        // state.hasMore = action.payload.length > 0
         if (action.meta.arg.replace) {
-          articlesAdapter.setAll(state, action.payload.data)
+          articlesAdapter.setAll(state, action.payload.articles)
         } else {
-          articlesAdapter.addMany(state, action.payload.data)
+          articlesAdapter.addMany(state, action.payload.articles)
         }
       })
       .addCase(fetchArticlesList.rejected, (state, action) => {
