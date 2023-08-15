@@ -5,7 +5,6 @@ import {
   ReducersMapObject,
 } from '@reduxjs/toolkit'
 import { $api } from '@/shared/api/api'
-import { counterReducer } from '../../../../entities/Counter'
 import { userReducer } from '../../../../entities/User'
 import { createReducerManager } from './reducerManager'
 import { StateSchema, ThunkExtraArg } from './StateSchema'
@@ -18,7 +17,6 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
-    counter: counterReducer,
     user: userReducer,
     saveScroll: saveScrollReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
@@ -39,16 +37,15 @@ export function createReduxStore(
         thunk: {
           extraArgument: extraArg,
         },
-        serializableCheck: {
-          ignoredActions: ['articlesPage/fetchArticlesList/fulfilled'],
-        },
       }).concat(rtkApi.middleware),
   })
 
-  // @ts-ignore
-  store.reducerManager = reducerManager
+  const storeWithManager = store as typeof store & {
+    reducerManager: typeof reducerManager
+  }
+  storeWithManager.reducerManager = reducerManager
 
-  return store
+  return storeWithManager
 }
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch']

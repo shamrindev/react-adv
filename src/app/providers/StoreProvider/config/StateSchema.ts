@@ -7,7 +7,6 @@ import {
 import { EnhancedStore } from '@reduxjs/toolkit/dist/configureStore'
 import { AxiosInstance } from 'axios'
 import { ArticleDetailsSchema } from '@/entities/Article'
-import { CounterSchema } from '@/entities/Counter'
 import { UserSchema } from '@/entities/User'
 import { AddCommentFormSchema } from '@/features/AddNewComment'
 import { LoginSchema } from '@/features/AuthByUserName'
@@ -19,12 +18,11 @@ import { ArticlesPageSchema } from '@/pages/ArticlesPage'
 import { rtkApi } from '@/shared/api/rtkApi'
 
 export interface StateSchema {
-  counter: CounterSchema
   user: UserSchema
   saveScroll: SaveScrollSchema
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
-  // Асинхронные редюсеры
+  // Async (lazily-mounted) reducers
   loginForm?: LoginSchema
   profile?: ProfileSchema
   articleDetails?: ArticleDetailsSchema
