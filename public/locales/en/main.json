@@ -1,5 +1,5 @@
 {
-  "Описание": "An application where users with the role of an administrator can create, edit, and delete articles, while regular users can read, comment, and rate each article.",
+  "Описание": "A Reddit-style community for IT, science and finance. Browse freely as a guest, or sign in to publish articles, discuss and vote.",
   "Учетные записи для тестирования функционала": "Credentials for testing functionality",
   "Администратор": "Administrator:",
   "(функционал в разработке) логин: admin, пароль: 123": "(functionality in development) login: admin, password: 123",
@@ -22,10 +22,13 @@
   "Читайте, обсуждайте и голосуйте за статьи об IT, науке и не только": "Read, discuss and upvote articles on IT, science and beyond",
   "Перейти к статьям": "Browse articles",
   "Популярные сообщества": "Popular communities",
+  "Популярные статьи": "Popular articles",
+  "Смотреть все": "View all",
+  "Смотреть все статьи": "View all articles",
   "О проекте": "About artHub",
   "Демо-доступ": "Demo access",
   "admin / 123 — администратор · user / 123 — пользователь": "admin / 123 — administrator · user / 123 — user",
   "Программирование и разработка": "Programming & engineering",
-  "Исследования и открытия": "Research & discovery",
-  "Рынки и финансы": "Markets & finance"
+  "Искусственный интеллект": "Artificial intelligence",
+  "Блокчейн и крипто": "Blockchain & crypto"
 }

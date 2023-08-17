@@ -3,7 +3,7 @@
   "Редактировать": "Edit",
   "Отменить": "Cancel",
   "Сохранить": "Save",
-  "Произошла ошибка при загрузке профиля": "Profile loading error has ocured",
+  "Произошла ошибка при загрузке профиля": "Profile loading error has occurred",
   "Попробуйте перезагрузить страницу": "Please, try to reload this page",
   "Ваше имя": "Your name",
   "Ваше фамилия": "Your surname",
@@ -11,9 +11,7 @@
   "Город": "Your city",
   "Имя пользователя": "User name",
   "Введите ссылку на аватар": "Avatar link",
-  "Имя и фамилия обязательны": "Name and surname requrid",
-  "Некорректный возраст": "Incorrect age",
-  "Некорректный регион": "Incorrect country",
-  "Ошибка сервера": "Server error",
-  "Данные не указаны": "Data not found"
+  "Изменить аватар": "Change avatar",
+  "Изменить": "Edit",
+  "Готово": "Done"
 }
