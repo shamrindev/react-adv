@@ -1,204 +1,132 @@
-## Запуск проекта
+# artHub
+
+A Reddit-style article-sharing single-page app: browse a community feed, read and
+write articles, upvote/downvote, rate, and comment. Built as a production-grade
+front-end showcase with **React 18 + TypeScript**, **Redux Toolkit / RTK Query**,
+and a strict **Feature-Sliced Design** architecture.
+
+🔗 **Live component library (Storybook):** https://ch4m4.github.io/react-adv/
+
+<!-- Add a screenshot or GIF of the feed here, e.g. docs/feed.png, to make the
+     README pop for reviewers. -->
+
+---
+
+## Features
+
+- **Article feed** — infinite scroll, sort (views / title / date), filter by
+  community, and full-text search.
+- **Articles** — rich content blocks (text, image, code), create & edit, related
+  recommendations (RTK Query).
+- **Engagement** — upvote/downvote with optimistic local state, 5-star rating,
+  and threaded comments.
+- **Auth & RBAC** — mock login with role-based route guards (`USER` / `ADMIN` /
+  `MANAGER`); guests can browse, authenticated users can contribute.
+- **i18n** — full English/Russian localization (`react-i18next`).
+- **Theming** — dark (default) and light themes via CSS custom properties.
+- **Accessible** — labelled controls, keyboard-operable rating/voting, focus-trapped
+  modals, Escape-to-close drawers.
+
+## Tech stack
+
+| Area | Choices |
+| --- | --- |
+| UI | React 18, TypeScript 4.8 (`strict`), SCSS Modules |
+| State | Redux Toolkit, RTK Query, dynamically-injected reducers |
+| Routing | react-router-dom 6 (lazy routes, RBAC guards) |
+| Build | webpack 5 (hand-rolled config) with an alternative Vite config |
+| i18n | i18next / react-i18next |
+| Quality | ESLint, Stylelint, Prettier, Jest + Testing Library, Cypress, Storybook |
+| Mock API | json-server |
+
+## Architecture — Feature-Sliced Design
+
+Code is organized into FSD layers, each importing only from the layers below it
+(`app → pages → widgets → features → entities → shared`). Every slice exposes a
+narrow public API through its `index.ts`; cross-slice imports go through those
+barrels (enforced by the `@/` path alias).
 
 ```
-npm install - устанавливаем зависимости
-npm run start:dev или npm run start:dev:vite - запуск сервера + frontend проекта в dev режиме
+src/
+  app/        # providers (store, router, theme, error boundary), global styles
+  pages/      # route-level screens (lazy-loaded)
+  widgets/    # composite UI blocks (Navbar, Sidebar, Page)
+  features/   # user scenarios (auth, add comment, rate article, edit profile…)
+  entities/   # business units (Article, Comment, User, Profile, Rating…)
+  shared/     # reusable UI kit, libs, hooks, config, types
 ```
 
----
+Highlights worth a look:
 
-## Скрипты
+- **Dynamic reducer manager** (`src/app/providers/StoreProvider/config/reducerManager.ts`)
+  + `DynamicModuleLoader` — feature reducers mount on demand and tear down on
+  unmount, so the Redux state tree is code-split rather than monolithic.
+- **End-to-end typed thunks** via a shared `ThunkConfig<T>` with API dependency
+  injection, plus a reusable generic `TestAsyncThunk` test harness.
+- **Declarative, typed routing** with per-route `authOnly` / `roles`, covered by an
+  integration test of the full auth matrix.
 
-- `npm run start` - Запуск frontend проекта на webpack dev server
-- `npm run start:vite` - Запуск frontend проекта на vite
-- `npm run start:dev` - Запуск frontend проекта на webpack dev server + backend
-- `npm run start:dev:vite` - Запуск frontend проекта на vite + backend
-- `npm run start:dev:server` - Запуск backend сервера
-- `npm run build:prod` - Сборка в prod режиме
-- `npm run build:dev` - Сборка в dev режиме (не минимизирован)
-- `npm run lint:ts` - Проверка ts файлов линтером
-- `npm run lint:ts:fix` - Исправление ts файлов линтером
-- `npm run lint:scss` - Проверка scss файлов style линтером
-- `npm run lint:scss:fix` - Исправление scss файлов style линтером
-- `npm run test:unit` - Хапуск unit тестов с jest
-- `npm run test:ui` - Хапуск скриншотных тестов с loki
-- `npm run test:ui:ok` - Подтверждение новых скриншотов
-- `npm run test:ui:ci` - Запуск скриншотных тестов в CI
-- `npm run test:ui:report` - Генерация полного отчета для скриншотных тестов
-- `npm run test:ui:json` - Генерация json отчета для скриншотных тестов
-- `npm run test:ui:html` - Генерация HTML отчета для скриншотных тестов
-- `npm run storybook` - запуск Storybook
-- `npm run storybook:build` - Сборка storybook билда
-- `npm run prepare` - прекоммит хуки
-- `npm run generate:slice` - Скрипт для генерации FSD слайсов
+## Getting started
 
----
+### Prerequisites
 
-## Архитектура проекта
+- Node.js **>= 18** (an `.nvmrc` pins the recommended LTS — run `nvm use`)
 
-Проект написан в соответствии с методологией Feature sliced design
+### Install
 
-Ссылка на документацию - [feature sliced design](https://feature-sliced.design/docs/get-started/tutorial)
-
----
-
-## Работа с переводами
-
-В проекте используется библиотека i18next для работы с переводами.
-Файлы с переводами хранятся в public/locales.
-
-Для комфортной работы рекомендуем установить плагин для webstorm/vscode
-
-Документация i18next - [https://react.i18next.com/](https://react.i18next.com/)
-
----
-
-## Тесты
-
-В проекте используются 4 вида тестов:
-
-1. Обычные unit тесты на jest - `npm run test:unit`
-2. Тесты на компоненты с React testing library -`npm run test:unit`
-3. Скриншотное тестирование с loki `npm run test:ui`
-4. e2e тестирование с Cypress `npm run test:e2e`
-
-Подробнее о тестах - [документация тестирование](/docs/tests.md)
-
----
-
-## Линтинг
-
-В проекте используется eslint для проверки typescript кода и stylelint для проверки файлов со стилями.
-
-Также для строгого контроля главных архитектурных принципов
-используется собственный eslint plugin _eslint-plugin-ulbi-tv-plugin_,
-который содержит 3 правила
-
-1. path-checker - запрещает использовать абсолютные импорты в рамках одного модуля
-2. layer-imports - проверяет корректность использования слоев с точки зрения FSD
-   (например widgets нельзя использовать в features и entitites)
-3. public-api-imports - разрешает импорт из других модулей только из public api. Имеет auto fix
-
-##### Запуск линтеров
-
-- `npm run lint:ts` - Проверка ts файлов линтером
-- `npm run lint:ts:fix` - Исправление ts файлов линтером
-- `npm run lint:scss` - Проверка scss файлов style линтером
-- `npm run lint:scss:fix` - Исправление scss файлов style линтером
-
----
-
-## Storybook
-
-В проекте для каждого компонента описываются стори-кейсы.
-Запросы на сервер мокаются с помощью storybook-addon-mock.
-
-Файл со сторикейсами создает рядом с компонентом с расширением .stories.tsx
-
-Запустить сторибук можно командой:
-
-- `npm run storybook`
-
-Подробнее о [Storybook](/docs/storybook.md)
-
-Пример:
-
-```typescript jsx
-import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator'
-import { Button, ButtonSize, ButtonTheme } from './Button'
-import { Theme } from '@/shared/const/theme'
-
-export default {
-  title: 'shared/Button',
-  component: Button,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof Button>
-
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
-
-export const Primary = Template.bind({})
-Primary.args = {
-  children: 'Text',
-}
-
-export const Clear = Template.bind({})
-Clear.args = {
-  children: 'Text',
-  theme: ButtonTheme.CLEAR,
-}
+```bash
+npm install
 ```
 
----
+### Generate the local TLS cert for the mock API (one-time)
 
-## Конфигурация проекта
+The mock server also exposes HTTPS, which needs a self-signed certificate. The
+cert/key are git-ignored — generate your own:
 
-Для разработки проект содержит 2 конфига:
+```bash
+openssl req -x509 -newkey rsa:2048 -nodes -days 365 \
+  -keyout json-server/key.pem -out json-server/cert.pem -subj "/CN=localhost"
+```
 
-1. Webpack - ./config/build
-2. vite - vite.config.ts
+### Run (frontend + mock API together)
 
-Оба сборщика адаптированы под основные фичи приложения.
+```bash
+npm run start:dev        # webpack dev server (http://localhost:3003) + json-server
+# or
+npm run start:dev:vite   # same, using Vite instead of webpack
+```
 
-Вся конфигурация хранится в /config
+The mock API (json-server) runs on `http://localhost:8003` (and `https://localhost:8443`).
 
-- /config/babel - babel
-- /config/build - конфигурация webpack
-- /config/jest - конфигурация тестовой среды
-- /config/storybook - конфигурация сторибука
+### Demo credentials
 
-В папке `scripts` находятся различные скрипты для рефакторинга\упрощения написания кода\генерации отчетов и тд.
+| Username | Password | Role |
+| --- | --- | --- |
+| `admin` | `123` | Admin |
+| `user` | `123` | User |
+| `manager` | `123` | Manager |
 
----
+## Scripts
 
-## CI pipeline и pre commit хуки
+| Script | Description |
+| --- | --- |
+| `npm run start:dev` | Run the app (webpack) + mock API |
+| `npm run start:dev:vite` | Run the app (Vite) + mock API |
+| `npm run build:prod` | Production build |
+| `npm run lint:ts` / `lint:scss` | Lint TypeScript / SCSS (append `:fix` to autofix) |
+| `npm run types:check` | TypeScript type-check (`tsc --noEmit`) |
+| `npm run test:unit` | Jest unit/integration tests |
+| `npm run test:e2e` | Open Cypress (run the app first) |
+| `npm run storybook` | Storybook component explorer |
 
-Конфигурация github actions находится в /.github/workflows.
-В ci прогоняются все виды тестов, сборка проекта и сторибука, линтинг.
+## Testing
 
-В прекоммит хуках проверяем проект линтерами, конфиг в /.husky
+- **Unit & integration** — Jest + Testing Library, including slices, async thunks
+  (via the `TestAsyncThunk` harness), and a routing/RBAC integration test.
+- **E2E** — Cypress specs (login → create article → comment → rate). Run the app,
+  then `npm run test:e2e`.
+- **Component docs** — Storybook stories for the shared UI kit and key features.
 
----
+## License
 
-### Работа с данными
-
-Взаимодействие с данными осуществляется с помощью redux toolkit.
-По возможности переиспользуемые сущности необходимо нормализовать с помощью EntityAdapter
-
-Запросы на сервер отправляются с помощью [RTK query](/src/shared/api/rtkApi.ts)
-
-Для асинхронного подключения редюсеров (чтобы не тянуть их в общий бандл) используется
-[DynamicModuleLoader](/src/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader.tsx)
-
----
-
-## Сущности (entities)
-
-- [Article](/src/entities/Article)
-- [Comment](/src/entities/Comment)
-- [Counter](/src/entities/Counter)
-- [Country](/src/entities/Country)
-- [Currency](/src/entities/Currency)
-- [Notification](/src/entities/Notification)
-- [Profile](/src/entities/Profile)
-- [Rating](/src/entities/Rating)
-- [User](/src/entities/User)
-
-## Фичи (features)
-
-- [addCommentForm](/src/features/addCommentForm)
-- [articleEditForm](/src/features/articleEditForm)
-- [articleRating](/src/features/articleRating)
-- [articleRecommendationsList](/src/features/articleRecommendationsList)
-- [AuthByUsername](/src/features/AuthByUsername)
-- [avatarDropdown](/src/features/avatarDropdown)
-- [editableProfileCard](/src/features/editableProfileCard)
-- [LangSwitcher](/src/features/LangSwitcher)
-- [notificationButton](/src/features/notificationButton)
-- [profileRating](/src/features/profileRating)
-- [ThemeSwitcher](/src/features/ThemeSwitcher)
-- [UI](/src/features/UI)
+MIT © Vladislav Shamrin
