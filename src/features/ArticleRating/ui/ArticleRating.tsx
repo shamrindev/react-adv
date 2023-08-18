@@ -30,7 +30,7 @@ const ArticleRating = ({ className, articleId }: ArticleRatingProps) => {
           feedback,
         })
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     },
     [articleId, rateArticleMutation, userData?.id]

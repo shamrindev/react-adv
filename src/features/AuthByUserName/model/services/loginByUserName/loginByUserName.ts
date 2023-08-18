@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localstorage'
-import { User, userActions } from '../../../../../entities/User'
+import { User, userActions } from '@/entities/User'
 interface LoginByUserNameProps {
   username: string
   password: string
@@ -20,13 +20,16 @@ export const loginByUserName = createAsyncThunk<
     if (!res.data) {
       throw new Error()
     }
-    localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(res.data))
-    dispatch(userActions.setAuthData(res.data))
-    // extra.navigate?.('/')
+    // the mock API echoes back the stored record including the plaintext
+    // password — never persist that. Keep only the safe user fields.
+    const safeUser = { ...res.data } as User & { password?: string }
+    delete safeUser.password
+    localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(safeUser))
+    dispatch(userActions.setAuthData(safeUser))
 
-    return res.data
+    return safeUser
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return rejectWithValue('error')
   }
 })

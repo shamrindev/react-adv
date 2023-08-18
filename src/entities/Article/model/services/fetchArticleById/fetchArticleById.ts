@@ -9,7 +9,7 @@ export const fetchArticleById = createAsyncThunk<
 >('articleDetails/fetchProfileData', async (articleId, thunkAPI) => {
   const { extra, rejectWithValue } = thunkAPI
   try {
-    // кейс для сторибука, когда не передаем id и санка нам не нужна
+    // storybook case: no id passed, so the thunk is not needed
     if (!articleId) {
       throw new Error('storybook case')
     }

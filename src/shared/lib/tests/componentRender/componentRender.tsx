@@ -31,7 +31,7 @@ export const TestProvider = (props: IProps) => {
       <StoreProvider asyncReducers={asyncReducers} initialState={initialState}>
         <I18nextProvider i18n={i18nForTests}>
           <ThemeProvider initialTheme={themeProvider}>
-            <div className={`app ${themeProvider}`}>{children}</div>
+            <div className={`app_redesigned ${themeProvider}`}>{children}</div>
           </ThemeProvider>
         </I18nextProvider>
       </StoreProvider>

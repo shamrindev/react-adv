@@ -9,12 +9,12 @@ import { AppLink } from '@/shared/ui/AppLink'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Card } from '@/shared/ui/Card'
 import { Icon } from '@/shared/ui/Icon'
-import { Text } from '@/shared/ui/Text'
 import { AppImage } from '@/shared/ui/AppImage'
 import { Skeleton } from '@/shared/ui/Skeleton'
 import { getRouteArticleDetails } from '@/shared/const/router'
 import { ArticleTextBlock } from '../../../model/types/article'
 import { ArticleBlockType, ArticleView } from '../../../model/consts/consts'
+import { useArticleVote } from '../../../lib/useArticleVote'
 import { ArticleListItemProps } from '../ArticleListItem.types'
 import cls from './ArticleListItem.module.scss'
 
@@ -28,6 +28,15 @@ export const ArticleListItem = ({
 
   const community = article.type?.[0] ?? ''
   const detailsRoute = getRouteArticleDetails(article.id)
+  const author = article.user?.username ? `u/${article.user.username} · ` : ''
+  // built as variables (not JSX literals) so the `r/` and `·` separators don't
+  // trip the i18next no-literal-string rule
+  const communityLabel = `r/${community}`
+  const metaLabel = `· ${author}${article.createdAt}`
+  const { vote, score, upvote, downvote } = useArticleVote(
+    article.id,
+    article.views
+  )
 
   // shown when an article image is missing, 404s, or is a dead 1x1 hotlink
   const imgPlaceholder = (
@@ -43,36 +52,68 @@ export const ArticleListItem = ({
         src={article.user?.avatar}
         className={cls.communityAvatar}
       />
-      <Text text={`r/${community}`} className={cls.community} />
-      <Text
-        text={`· u/${article.user?.username ?? ''} · ${article.createdAt}`}
-        className={cls.meta}
-      />
-      <Text text="···" className={cls.dots} />
+      <span className={cls.community}>{communityLabel}</span>
+      <span className={cls.meta}>{metaLabel}</span>
+      {/* eslint-disable-next-line i18next/no-literal-string */}
+      <span className={cls.dots}>···</span>
     </div>
   )
 
   const footer = (
     <div className={cls.footer}>
       <div className={cls.votePill}>
-        <Icon Svg={ArrowUpIcon} width={18} height={18} className={cls.upIcon} />
-        <Text text={String(article.views)} className={cls.voteCount} />
-        <Icon
-          Svg={ArrowDownIcon}
-          width={18}
-          height={18}
-          className={cls.downIcon}
-        />
+        <button
+          type="button"
+          className={cls.voteBtn}
+          onClick={upvote}
+          aria-label={t('Голос за')}
+          aria-pressed={vote === 1}
+        >
+          <Icon
+            Svg={ArrowUpIcon}
+            width={18}
+            height={18}
+            className={classNames(cls.upIcon, { [cls.up]: vote === 1 })}
+          />
+        </button>
+        <span
+          className={classNames(cls.voteCount, {
+            [cls.up]: vote === 1,
+            [cls.down]: vote === -1,
+          })}
+        >
+          {score}
+        </span>
+        <button
+          type="button"
+          className={cls.voteBtn}
+          onClick={downvote}
+          aria-label={t('Голос против')}
+          aria-pressed={vote === -1}
+        >
+          <Icon
+            Svg={ArrowDownIcon}
+            width={18}
+            height={18}
+            className={classNames(cls.downIcon, { [cls.down]: vote === -1 })}
+          />
+        </button>
       </div>
       <div className={cls.pill}>
         <Icon Svg={CommentIcon} width={18} height={18} />
-        <Text text={t('Обсудить')} className={cls.pillText} />
+        <span className={cls.pillText}>{t('Обсудить')}</span>
       </div>
       <div className={cls.pill}>
         <Icon Svg={ShareIcon} width={18} height={18} />
-        <Text text={t('Поделиться')} className={cls.pillText} />
+        <span className={cls.pillText}>{t('Поделиться')}</span>
       </div>
     </div>
+  )
+
+  const title = (
+    <AppLink to={detailsRoute} target={target} className={cls.titleLink}>
+      <h3 className={cls.title}>{article.title}</h3>
+    </AppLink>
   )
 
   if (view === ArticleView.SMALL) {
@@ -82,9 +123,7 @@ export const ArticleListItem = ({
         className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
       >
         {header}
-        <AppLink to={detailsRoute} target={target} className={cls.titleLink}>
-          <Text title={article.title} className={cls.title} />
-        </AppLink>
+        {title}
         {article.img && (
           <AppLink to={detailsRoute} target={target} className={cls.imageLink}>
             <AppImage
@@ -102,8 +141,8 @@ export const ArticleListItem = ({
   }
 
   const textBlock = article.blocks?.find(
-    (block) => block.type === ArticleBlockType.TEXT
-  ) as ArticleTextBlock | undefined
+    (block): block is ArticleTextBlock => block.type === ArticleBlockType.TEXT
+  )
 
   return (
     <Card
@@ -111,11 +150,9 @@ export const ArticleListItem = ({
       className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
     >
       {header}
-      <AppLink to={detailsRoute} target={target} className={cls.titleLink}>
-        <Text title={article.title} className={cls.title} />
-      </AppLink>
+      {title}
       {textBlock?.paragraphs?.[0] && (
-        <Text text={textBlock.paragraphs[0]} className={cls.snippet} />
+        <p className={cls.snippet}>{textBlock.paragraphs[0]}</p>
       )}
       {article.img && (
         <AppLink to={detailsRoute} target={target} className={cls.imageLink}>

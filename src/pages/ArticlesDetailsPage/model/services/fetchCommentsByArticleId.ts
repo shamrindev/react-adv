@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
-import { Comment } from '@/entities/Comment/model/types/comment'
+import { Comment } from '@/entities/Comment'
 
 export const fetchCommentsByArticleId = createAsyncThunk<
   Comment[],
@@ -15,7 +15,8 @@ export const fetchCommentsByArticleId = createAsyncThunk<
     const res = await extra.api.get<Comment[]>(`/comments`, {
       params: {
         articleId,
-        // json.server - так мы получаем дополнительную сущность user (см доку json-server#relationships)
+        // json-server: _expand pulls the related `user` entity in (see
+        // json-server docs #relationships)
         _expand: 'user',
       },
     })

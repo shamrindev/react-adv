@@ -5,8 +5,17 @@ import {
   ThemeContext,
 } from '../lib/ThemeContext'
 
+// only LIGHT/DARK are valid; coerce any stale value (e.g. a previously stored
+// legacy theme class) back to the default. Dark is the default so the first
+// impression matches the Reddit-style dark reference; light stays a click away
+// via the theme switcher.
+const storedTheme = localStorage.getItem(
+  LOCAL_STORAGE_THEME_KEY
+) as Theme | null
 const defaultTheme =
-  (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT
+  storedTheme === Theme.DARK || storedTheme === Theme.LIGHT
+    ? storedTheme
+    : Theme.DARK
 
 interface ThemeProviderProps {
   initialTheme?: Theme

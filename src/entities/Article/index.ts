@@ -8,6 +8,10 @@ export {
   ArticleBlockType,
 } from './model/consts/consts'
 export type { ArticleDetailsSchema } from './model/types/articleDetailsSchema'
+export {
+  ARTICLE_COMMUNITIES,
+  type ArticleCommunity,
+} from './model/consts/communities'
 export { ArticleList, ArticleListWrap } from './ui/ArticleList/ArticleList'
 export { ArticleViewSelector } from './ui/ArticleViewSelector/ArticleViewSelector'
 export { ArticleSortSelector } from './ui/ArticleSortSelector/ArticleSortSelector'

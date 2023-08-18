@@ -1,7 +1,7 @@
 import { Country } from '@/entities/Country'
 import { Currency } from '@/entities/Currency'
 import { ProfileCard } from '@/entities/Profile'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -45,13 +45,18 @@ export const EditableProfileCard = ({
   const dispatch = useAppDispatch()
   const validateErrors = useSelector(getProfileValidateErrors)
 
-  const validateErrorTranslates = {
-    [ValidateProfileError.INCORRECT_USER_DATA]: t('Имя и фамилия обязательны'),
-    [ValidateProfileError.INCORRECT_AGE]: t('Некорректный возраст'),
-    [ValidateProfileError.INCORRECT_COUNTRY]: t('Некорректный регион'),
-    [ValidateProfileError.SERVER_ERROR]: t('Ошибка сервера'),
-    [ValidateProfileError.NO_DATA]: t('Данные не указаны'),
-  }
+  const validateErrorTranslates = useMemo(
+    () => ({
+      [ValidateProfileError.INCORRECT_USER_DATA]: t(
+        'Имя и фамилия обязательны'
+      ),
+      [ValidateProfileError.INCORRECT_AGE]: t('Некорректный возраст'),
+      [ValidateProfileError.INCORRECT_COUNTRY]: t('Некорректный регион'),
+      [ValidateProfileError.SERVER_ERROR]: t('Ошибка сервера'),
+      [ValidateProfileError.NO_DATA]: t('Данные не указаны'),
+    }),
+    [t]
+  )
   useInitialEffect(() => id && dispatch(fetchProfileData(id)))
 
   const onChangeFirstName = useCallback(
@@ -115,7 +120,7 @@ export const EditableProfileCard = ({
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <VStack gap="8" max className={classNames('', {}, [className])}>
         <EditableProfileCardHeader />
-        {validateErrors?.length &&
+        {!!validateErrors?.length &&
           validateErrors.map((err) => (
             <Text
               key={err}

@@ -1,4 +1,4 @@
-import { FC, memo, useMemo } from 'react'
+import { FC, memo, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -7,26 +7,36 @@ import { ThemeSwitcher } from '@/shared/ui/ThemeSwitcher'
 import { AppLink } from '@/shared/ui/AppLink'
 import { VStack } from '@/shared/ui/Stack'
 import { getRouteArticles } from '@/shared/const/router'
+import { ARTICLE_COMMUNITIES } from '@/entities/Article'
 import { SidebarItem } from '../../SidebarItem/SidebarItem'
 import { getSidebarItems } from '../../../model/selectors/getSidebarItems'
 import cls from './Sidebar.module.scss'
-import { SidebarProps } from '../deprecated/Sidebar'
 
-interface CommunityItem {
-  name: string
-  color: string
+export interface SidebarProps {
+  className?: string
+  /** controls the mobile off-canvas drawer */
+  isMobileOpen?: boolean
+  onClose?: () => void
 }
-
-const communities: CommunityItem[] = [
-  { name: 'IT', color: 'var(--accent-up)' },
-  { name: 'SCIENCE', color: 'var(--accent-down)' },
-  { name: 'ECONOMICS', color: 'var(--accent-positive)' },
-]
 
 export const Sidebar: FC<SidebarProps> = memo(
   ({ className, isMobileOpen, onClose }: SidebarProps) => {
     const { t } = useTranslation()
     const sidebarItemsList = useSelector(getSidebarItems)
+
+    // let keyboard users dismiss the mobile drawer with Escape
+    useEffect(() => {
+      if (!isMobileOpen) {
+        return
+      }
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose?.()
+        }
+      }
+      window.addEventListener('keydown', onKeyDown)
+      return () => window.removeEventListener('keydown', onKeyDown)
+    }, [isMobileOpen, onClose])
 
     const itemList = useMemo(
       () =>
@@ -38,7 +48,9 @@ export const Sidebar: FC<SidebarProps> = memo(
 
     return (
       <>
-        {isMobileOpen && <div className={cls.overlay} onClick={onClose} />}
+        {isMobileOpen && (
+          <div className={cls.overlay} onClick={onClose} aria-hidden="true" />
+        )}
         <aside
           data-testid="sidebar"
           className={classNames(
@@ -57,10 +69,12 @@ export const Sidebar: FC<SidebarProps> = memo(
           <div className={cls.section}>
             <span className={cls.sectionLabel}>{t('СООБЩЕСТВА')}</span>
             <VStack gap="4" max>
-              {communities.map((community) => (
+              {ARTICLE_COMMUNITIES.map((community) => (
                 <AppLink
                   key={community.name}
-                  to={getRouteArticles()}
+                  to={`${getRouteArticles()}?type=${encodeURIComponent(
+                    community.name
+                  )}`}
                   className={cls.community}
                 >
                   <span

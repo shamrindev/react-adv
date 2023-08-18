@@ -10,7 +10,7 @@ import { StoreProvider } from '@/app/providers/StoreProvider'
 
 const container = document.getElementById('root')
 if (!container) {
-  throw new Error('Корневой элемент не найден')
+  throw new Error('Root element not found')
 }
 const root = createRoot(container)
 root.render(

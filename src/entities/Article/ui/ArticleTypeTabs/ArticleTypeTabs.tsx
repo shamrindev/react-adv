@@ -16,7 +16,9 @@ export const ArticleTypeTabs = ({
   value,
   onChangeTab,
 }: ArticleTypeTabsProps) => {
-  const { t } = useTranslation()
+  // the category labels (IT, Data Science, …) live in the `articles` namespace,
+  // not the default one — without this the tab bar renders raw English keys in RU
+  const { t } = useTranslation('articles')
 
   const typeTabs = useMemo(() => {
     const tabs = [] as TabItem<(typeof ArticleType)[keyof typeof ArticleType]>[]

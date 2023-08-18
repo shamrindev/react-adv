@@ -22,6 +22,13 @@ export enum ArticleListWrap {
   NO_WRAP = 'no_wrap',
 }
 
+const getSkeletons = (view: ArticleView) =>
+  new Array(view === ArticleView.SMALL ? 9 : 2)
+    .fill(0)
+    .map((_, index) => (
+      <ArticleListItemSkeleton key={`skeleton-${index}`} view={view} />
+    ))
+
 export const ArticleList = ({
   className,
   articles,
@@ -51,12 +58,6 @@ export const ArticleList = ({
       </div>
     )
   }
-  const getSkeletons = (view: ArticleView) => {
-    return new Array(view === ArticleView.SMALL ? 9 : 2)
-      .fill(0)
-      .map((item, index) => <ArticleListItemSkeleton key={index} view={view} />)
-  }
-
   return (
     <div
       data-testid={'ArticlesList'}

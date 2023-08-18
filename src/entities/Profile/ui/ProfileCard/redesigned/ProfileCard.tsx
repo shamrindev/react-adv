@@ -1,12 +1,15 @@
 import { CountrySelect } from '../../../../Country'
 import { CurrencySelect } from '../../../../Currency'
 import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Input } from '@/shared/ui/Input'
 import { Skeleton } from '@/shared/ui/Skeleton'
 import { Text, TextAlign, TextTheme } from '@/shared/ui/Text'
+import { Modal } from '@/shared/ui/Modal'
+import { Button } from '@/shared/ui/Button'
 import cls from './ProfileCard.module.scss'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { ProfileCardProps } from '../ProfileCard.types'
@@ -27,6 +30,7 @@ export const ProfileCard = ({
   onChangeCountry,
 }: ProfileCardProps) => {
   const { t } = useTranslation('profile')
+  const [isAvatarModal, setIsAvatarModal] = useState(false)
 
   if (isLoading) {
     return (
@@ -75,11 +79,25 @@ export const ProfileCard = ({
       max
       className={classNames(cls.profilecard, mods, [className])}
     >
-      {data?.avatar && (
-        <HStack justify="center" max>
-          <Avatar size={120} src={data?.avatar} alt="avatar img" />
-        </HStack>
-      )}
+      <HStack justify="center" max>
+        {readonly ? (
+          data?.avatar && (
+            <Avatar size={120} src={data?.avatar} alt="avatar img" />
+          )
+        ) : (
+          <button
+            type="button"
+            className={cls.avatarBtn}
+            onClick={() => setIsAvatarModal(true)}
+            aria-label={t('Изменить аватар')}
+          >
+            <Avatar size={120} src={data?.avatar} alt="avatar img" />
+            <span className={cls.avatarOverlay}>{t('Изменить')}</span>
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            <span className={cls.avatarBadge}>✎</span>
+          </button>
+        )}
+      </HStack>
 
       <VStack gap="4" max>
         <Text className={cls.label} text={t('Ваше имя')} />
@@ -133,16 +151,6 @@ export const ProfileCard = ({
         />
       </VStack>
 
-      <VStack gap="4" max>
-        <Text className={cls.label} text={t('Введите ссылку на аватар')} />
-        <Input
-          value={data?.avatar}
-          placeholder={t('Введите ссылку на аватар')}
-          readonly={readonly}
-          onChange={onChangeAvatar}
-        />
-      </VStack>
-
       <CurrencySelect
         value={data?.currency}
         onChange={onChangeCurrency}
@@ -153,6 +161,30 @@ export const ProfileCard = ({
         onChange={onChangeCountry}
         readonly={readonly}
       />
+
+      <Modal
+        isOpen={isAvatarModal}
+        onClose={() => setIsAvatarModal(false)}
+        lazy
+      >
+        <VStack gap="16" max>
+          <Text title={t('Изменить аватар')} />
+          <HStack justify="center" max>
+            <Avatar size={100} src={data?.avatar} alt="avatar preview" />
+          </HStack>
+          <Input
+            value={data?.avatar}
+            placeholder={t('Введите ссылку на аватар')}
+            onChange={onChangeAvatar}
+            autoFocus
+          />
+          <HStack justify="end" max>
+            <Button onClick={() => setIsAvatarModal(false)}>
+              {t('Готово')}
+            </Button>
+          </HStack>
+        </VStack>
+      </Modal>
     </VStack>
   )
 }

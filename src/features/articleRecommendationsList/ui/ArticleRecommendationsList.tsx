@@ -7,16 +7,29 @@ import { useArticleRecommendationsList } from '../api/articleRecommendationsApi'
 
 interface ArticleRecommendationsListProps {
   className?: string
+  currentArticleId?: string
 }
+
+const RECOMMENDATIONS_COUNT = 3
 
 export const ArticleRecommendationsList = ({
   className,
+  currentArticleId,
 }: ArticleRecommendationsListProps) => {
   const { t } = useTranslation()
 
-  const { data: articles, error, isLoading } = useArticleRecommendationsList(3)
+  // the current article is excluded server-side, so the row is always a full
+  // set of other articles (and never recommends itself).
+  const {
+    data: recommendations,
+    error,
+    isLoading,
+  } = useArticleRecommendationsList({
+    limit: RECOMMENDATIONS_COUNT,
+    excludeId: currentArticleId,
+  })
 
-  if (isLoading || error || !articles) {
+  if (isLoading || error || !recommendations?.length) {
     return null
   }
 
@@ -28,7 +41,7 @@ export const ArticleRecommendationsList = ({
     >
       <Text size={TextSize.L} title={t('Рекоммендуем')} />
       <ArticleList
-        articles={articles}
+        articles={recommendations}
         isLoading={isLoading}
         wrap={ArticleListWrap.NO_WRAP}
         target="_blank"

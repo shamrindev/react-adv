@@ -1,19 +1,33 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
-export const useThrottle = (
-  callback: (...args: any[]) => void,
+export function useThrottle<Args extends unknown[]>(
+  callback: (...args: Args) => void,
   delay: number
-) => {
-  const [throttle, setThrottle] = useState(false)
+) {
+  // refs (not state) — a throttle gate is internal bookkeeping, it should never
+  // trigger a re-render of the component that owns the throttled handler
+  const throttleRef = useRef(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout>>()
 
-  return useCallback(
-    (...args: any[]) => {
-      if (!throttle) {
-        callback(...args)
-        setThrottle(true)
-        setTimeout(() => setThrottle(false), delay)
+  useEffect(
+    () => () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
       }
     },
-    [throttle, callback, delay]
+    []
+  )
+
+  return useCallback(
+    (...args: Args) => {
+      if (!throttleRef.current) {
+        callback(...args)
+        throttleRef.current = true
+        timerRef.current = setTimeout(() => {
+          throttleRef.current = false
+        }, delay)
+      }
+    },
+    [callback, delay]
   )
 }

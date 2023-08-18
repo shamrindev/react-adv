@@ -21,7 +21,7 @@ export function useInfiniteScroll({
       }
 
       observer = new IntersectionObserver(([entry]) => {
-        //  чтобы колбэк вызывался 1 раз (только когда элемент в зоне видимости)
+        // fire the callback once, only when the sentinel enters the viewport
         if (entry.isIntersecting) {
           callback()
         }

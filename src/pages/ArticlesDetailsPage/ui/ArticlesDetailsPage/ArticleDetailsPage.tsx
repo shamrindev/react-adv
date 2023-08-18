@@ -7,13 +7,12 @@ import {
   DynamicModuleLoader,
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
-import { Page } from '@/widgets/Page/Page'
+import { Page } from '@/widgets/Page'
 import { ArticleDetails } from '../../../../entities/Article'
 import { articleDetailsPageReducer } from '../../model/slices'
 import cls from './ArticleDetailsPage.module.scss'
 import { ArticleDetailsPageHeader } from './ArticleDetailsPageHeader/ArticleDetailsPageHeader'
 import { ArticleDetailsComments } from '@/pages/ArticlesDetailsPage/ArticleDetailsComments/ArticleDetailsComments'
-import { ArticleRating } from '@/features/ArticleRating'
 
 interface ArticlesDetailsPageProps {
   className?: string
@@ -30,22 +29,9 @@ const ArticleDetailsPage = ({
 }: ArticlesDetailsPageProps) => {
   const { t } = useTranslation('article')
   const { id } = useParams<{ id: string }>()
+  const articleId = storybookId || id
 
-  if (storybookId) {
-    return (
-      <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-        <Page className={classNames(cls.articledetailspage, {}, [className])}>
-          <ArticleDetailsPageHeader />
-          <ArticleDetails id={storybookId} className={cls.mb_30} />
-          <ArticleRating articleId={storybookId} className={cls.mb_30} />
-          <ArticleRecommendationsList className={cls.mb_30} />
-          <ArticleDetailsComments id={storybookId} />
-        </Page>
-      </DynamicModuleLoader>
-    )
-  }
-
-  if (!id) {
+  if (!articleId) {
     return (
       <div className={classNames(cls.articledetailspage, {}, [className])}>
         {t('Статья не найдена')}
@@ -56,11 +42,14 @@ const ArticleDetailsPage = ({
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <Page className={classNames(cls.articledetailspage, {}, [className])}>
-        <ArticleDetailsPageHeader />
-        <ArticleDetails id={id} className={cls.mb_30} />
-        <ArticleRating articleId={id} className={cls.mb_30} />
-        <ArticleRecommendationsList className={cls.mb_30} />
-        <ArticleDetailsComments id={id} />
+        {/* one centered, fixed-width column (article + recommendations +
+            comments all line up), like a Reddit post page */}
+        <div className={cls.detail}>
+          <ArticleDetailsPageHeader />
+          <ArticleDetails id={articleId} />
+          <ArticleRecommendationsList currentArticleId={articleId} />
+          <ArticleDetailsComments id={articleId} />
+        </div>
       </Page>
     </DynamicModuleLoader>
   )

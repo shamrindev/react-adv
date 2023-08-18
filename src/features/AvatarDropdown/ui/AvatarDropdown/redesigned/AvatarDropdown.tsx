@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Dropdown } from '@/shared/ui/Popups'
 import { DropdownDirection } from '@/shared/types'
+import { Theme, useTheme } from '@/app/providers/ThemeProvider'
 import { getRouteAdmin, getRouteProfile } from '@/shared/const/router'
 
 interface AvatarDropdownProps {
@@ -21,16 +22,22 @@ export const AvatarDropdown = ({
   className,
   dropdownDirection = 'bottom left',
 }: AvatarDropdownProps) => {
-  const { t } = useTranslation('translation')
+  const { t, i18n } = useTranslation('translation')
 
   const authData = useSelector(getUserAuthData)
   const isAdmin = useSelector(isUserAdmin)
   const isManager = useSelector(isUserManager)
   const isAdminPanelAvaliable = isAdmin || isManager
   const dispatch = useDispatch()
+  const { theme, toggleTheme } = useTheme()
+  const isDark = theme === Theme.DARK
 
   const onLogout = () => {
     dispatch(userActions.logout())
+  }
+
+  const onToggleLang = () => {
+    i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru')
   }
 
   if (!authData) return null
@@ -40,6 +47,10 @@ export const AvatarDropdown = ({
       className={classNames('', {}, [className])}
       direction={dropdownDirection}
       items={[
+        {
+          content: t('PROFILE_PAGE'),
+          href: getRouteProfile(authData.id),
+        },
         ...(isAdminPanelAvaliable
           ? [
               {
@@ -48,10 +59,12 @@ export const AvatarDropdown = ({
               },
             ]
           : []),
+        // account preferences moved here (no separate Settings page)
         {
-          content: t('PROFILE_PAGE'),
-          href: getRouteProfile(authData.id),
+          content: isDark ? t('Светлая тема') : t('Тёмная тема'),
+          onClick: toggleTheme,
         },
+        { content: t('Сменить язык'), onClick: onToggleLang },
         { content: t('Выйти'), onClick: onLogout },
       ]}
       trigger={<Avatar fallbackInverted size={30} src={authData.avatar} />}

@@ -15,7 +15,6 @@ import {
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { useNavigate } from 'react-router-dom'
 
 export interface LoginFormProps {
   className?: string
@@ -29,7 +28,6 @@ const initialReducers: ReducersList = {
 const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const { username, password, isLoading, error } = useSelector(getLoginState)
 
   const onChangeUserName = useCallback(
@@ -47,12 +45,18 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   )
 
   const onLoginClick = useCallback(async () => {
+    // ignore empty submits (incl. Enter key) — the button is also disabled,
+    // but this keeps the keyboard path from firing a doomed request
+    if (!username || !password) {
+      return
+    }
     const res = dispatch(loginByUserName({ username, password }))
     if ((await res).meta.requestStatus === 'fulfilled') {
+      // close the modal but stay on the current page (Reddit-style) — logging in
+      // from an article's comments shouldn't bounce the reader back to home.
       onSuccess()
-      navigate?.('/')
     }
-  }, [dispatch, username, password, onSuccess, navigate])
+  }, [dispatch, username, password, onSuccess])
 
   const onEnterPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -74,24 +78,27 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
           type="text"
           className={cls.input}
           placeholder={t('Введите имя')}
+          aria-label={t('Введите имя')}
           autoFocus
           onChange={onChangeUserName}
           value={username}
           onKeyDown={onEnterPressHandler}
         />
         <Input
-          type="text"
+          type="password"
           className={cls.input}
           placeholder={t('Введите пароль')}
+          aria-label={t('Введите пароль')}
           onChange={onChangePassword}
           value={password}
           onKeyDown={onEnterPressHandler}
         />
         <Button
-          theme={ButtonTheme.OUTLINE}
+          theme={ButtonTheme.BACKGROUND_INVERTED}
           className={cls.loginBtn}
           onClick={onLoginClick}
-          disabled={isLoading}
+          disabled={isLoading || !username || !password}
+          fullWidth
         >
           {t('Войти')}
         </Button>

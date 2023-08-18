@@ -7,7 +7,9 @@ import ShareIcon from '@/shared/assets/icons/share.svg'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Icon } from '@/shared/ui/Icon'
 import { Text } from '@/shared/ui/Text'
+import { classNames } from '@/shared/lib/classNames/classNames'
 import { Article, ArticleBlock } from '../../../model/types/article'
+import { useArticleVote } from '../../../lib/useArticleVote'
 import cls from './ArticleDetailsRedesigned.module.scss'
 
 interface ArticleDetailsRedesignedProps {
@@ -22,6 +24,10 @@ export const ArticleDetailsRedesigned = ({
   const { t } = useTranslation('article')
 
   const community = article?.type?.[0] ?? ''
+  const { vote, score, upvote, downvote } = useArticleVote(
+    article?.id ?? '',
+    article?.views ?? 0
+  )
 
   return (
     <div className={cls.ArticleDetailsRedesigned}>
@@ -41,21 +47,45 @@ export const ArticleDetailsRedesigned = ({
         <Text text={article.subtitle} className={cls.subtitle} />
       )}
 
+      <div className={cls.blocks}>{article?.blocks.map(renderBlock)}</div>
+
       <div className={cls.actions}>
         <div className={cls.votePill}>
-          <Icon
-            Svg={ArrowUpIcon}
-            width={18}
-            height={18}
-            className={cls.upIcon}
+          <button
+            type="button"
+            className={cls.voteBtn}
+            onClick={upvote}
+            aria-label={t('Голос за')}
+            aria-pressed={vote === 1}
+          >
+            <Icon
+              Svg={ArrowUpIcon}
+              width={18}
+              height={18}
+              className={classNames(cls.upIcon, { [cls.up]: vote === 1 })}
+            />
+          </button>
+          <Text
+            text={String(score)}
+            className={classNames(cls.voteCount, {
+              [cls.up]: vote === 1,
+              [cls.down]: vote === -1,
+            })}
           />
-          <Text text={String(article?.views ?? 0)} className={cls.voteCount} />
-          <Icon
-            Svg={ArrowDownIcon}
-            width={18}
-            height={18}
-            className={cls.downIcon}
-          />
+          <button
+            type="button"
+            className={cls.voteBtn}
+            onClick={downvote}
+            aria-label={t('Голос против')}
+            aria-pressed={vote === -1}
+          >
+            <Icon
+              Svg={ArrowDownIcon}
+              width={18}
+              height={18}
+              className={classNames(cls.downIcon, { [cls.down]: vote === -1 })}
+            />
+          </button>
         </div>
         <div className={cls.pill}>
           <Icon Svg={CommentIcon} width={18} height={18} />
@@ -66,8 +96,6 @@ export const ArticleDetailsRedesigned = ({
           <Text text={t('Поделиться')} className={cls.pillText} />
         </div>
       </div>
-
-      <div className={cls.blocks}>{article?.blocks.map(renderBlock)}</div>
     </div>
   )
 }

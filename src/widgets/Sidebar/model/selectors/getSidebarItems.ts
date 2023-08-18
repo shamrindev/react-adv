@@ -1,9 +1,7 @@
 import MainIcon from '@/shared/assets/icons/main-20-20.svg'
 import ProfileIcon from '@/shared/assets/icons/profile-20-20.svg'
 import ArticleIcon from '@/shared/assets/icons/article-20-20.svg'
-import SettingsIcon from '@/shared/assets/icons/about-20-20.svg'
 import HomeIconRedesigned from '@/shared/assets/icons/home.svg'
-import SettingsIconRedesigned from '@/shared/assets/icons/settings.svg'
 import UserIconRedesigned from '@/shared/assets/icons/user.svg'
 import FeedIconRedesigned from '@/shared/assets/icons/feed.svg'
 
@@ -14,7 +12,6 @@ import {
   getRouteArticles,
   getRouteMain,
   getRouteProfile,
-  getRouteSettings,
 } from '@/shared/const/router'
 
 export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
@@ -30,12 +27,6 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
       Icon: ArticleIcon,
       IconRedesigned: FeedIconRedesigned,
       text: 'Статьи',
-    },
-    {
-      path: getRouteSettings(),
-      Icon: SettingsIcon,
-      IconRedesigned: SettingsIconRedesigned,
-      text: 'Настройки',
     },
   ]
   if (userData) {
