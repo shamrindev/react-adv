@@ -26,7 +26,9 @@ export default (env: BuildEnv) => {
   }
 
   const mode = env?.mode || 'development'
-  const PORT = env?.port || 3003
+  // `--env port=` wins (npm start), then a host-assigned PORT (preview tools
+  // that pick a free port), then the default.
+  const PORT = env?.port || Number(process.env.PORT) || 3003
   const apiUrl = getApiUrl(mode, env?.apiUrl)
   const isDev = mode === 'development'
 

@@ -16,14 +16,33 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
 
   const svgLoader = {
     test: /\.svg$/,
-    use: ['@svgr/webpack'],
+    use: [
+      {
+        loader: '@svgr/webpack',
+        options: {
+          // SVGR runs SVGO with its default preset, which strips `viewBox`.
+          // Without a viewBox, an icon rendered at any size other than its
+          // intrinsic width/height gets clipped (e.g. the 18px search glass
+          // collapsing to a half-disc). Keep the viewBox so icons scale
+          // crisply to whatever width/height the <Icon> component requests.
+          svgoConfig: {
+            plugins: [
+              {
+                name: 'preset-default',
+                params: { overrides: { removeViewBox: false } },
+              },
+            ],
+          },
+        },
+      },
+    ],
   }
 
   const codeBabelLoader = buildBabelLoader({ ...options, isTsx: false })
   const tsxCodeBabelLoader = buildBabelLoader({ ...options, isTsx: true })
 
   const cssLoader = buildCssLoader(isDev)
-  //Если не используем typescript, то нужно устанавливать babel для транспиляции tsx
+  // without typescript you would need babel to transpile tsx
   // const typescriptLoader = {
   //   test: /\.tsx?$/,
   //   use: 'ts-loader',

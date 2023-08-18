@@ -1,10 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run build:prod
-npm run lint:ts:fix
-npm run lint:scss:fix
+# Keep the pre-commit hook fast so it doesn't get bypassed with --no-verify:
+# format staged files and lint. The production build, Storybook build and the
+# full test suite run in CI, not on every commit.
 npx pretty-quick --staged
-
-npm run test:unit
-npm run storybook:build
+npm run lint:ts
+npm run lint:scss

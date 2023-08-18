@@ -1,7 +1,6 @@
 import { addDecorator } from '@storybook/react'
 import { RouterDecorator } from '@/shared/config/storybook/RouterDecorator/RouterDecorator'
 import { SuspenseDecorator } from '@/shared/config/storybook/SuspenseDecorator/SuspenseDecorator'
-import { FeatureFlagsDecorator } from '@/shared/config/storybook/FeatureFlagsDecorator/FeatureFlagsDecorator'
 import { Theme } from '@/app/providers/ThemeProvider/index'
 
 export const parameters = {
@@ -18,7 +17,6 @@ export const parameters = {
     list: [
       { name: 'light', class: Theme.LIGHT, color: '#e8e8ea' },
       { name: 'dark', class: Theme.DARK, color: '#0452ff' },
-      { name: 'green', class: Theme.GREEN, color: '#006a58' },
     ],
   },
 }
@@ -27,10 +25,7 @@ export const parameters = {
 addDecorator(RouterDecorator('/'))
 addDecorator(SuspenseDecorator)
 addDecorator((StoryComponent) => (
-  <div className="app">
+  <div className="app_redesigned">
     <StoryComponent />
   </div>
 ))
-// Added last so it is the outermost decorator and resets feature flags
-// from `parameters.features` (defaulting to off) before components render.
-addDecorator(FeatureFlagsDecorator)

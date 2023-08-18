@@ -1,16 +1,14 @@
-
-
-
-
-extractedTranslations
-extractedTranslations/en/translation.json
-extractedTranslations/ru/translation.json
-/storybook-static
-/build
 node_modules
+/build
+/storybook-static
 .idea
 
-.loki/report.html
-.loki/report.json
-reports
+# generated i18n extraction output
+extractedTranslations
 
+# local mock-server TLS cert/key — regenerate with openssl (see README)
+*.pem
+
+# visual-regression / report artifacts
+.loki
+reports

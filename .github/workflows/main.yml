@@ -1,42 +1,3 @@
-#name: linting, testing, building
-#on:
-#  push:
-#    branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
-#jobs:
-#  pipeline:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [ 17.x ]
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Staring Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#      - name: install modules
-#        run: npm ci --force
-#      - name: build production project
-#        run: npm run build:prod
-#        if: always()
-#      - name: linting typescript
-#        run: npm run lint:ts
-#        if: always()
-#      - name: linting css
-#        run: npm run lint:scss
-#      - name: unit testing
-#        if: always()
-#        run: npm run test:unit
-#      - name: build storybook
-#        run: npm run storybook:build
-#        if: always()
-#      - name: screenshot testing
-#        run: npm run test:ui:ci
-#        if: always()
-
 name: linting, testing, building
 on:
   push:
@@ -51,7 +12,7 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 jobs:
-  build-and-ui-testing:
+  build-and-deploy:
     runs-on: ubuntu-latest
     concurrency: ci-${{ github.ref }}
     environment:
@@ -59,33 +20,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     strategy:
       matrix:
-        node-version: [17.x]
+        node-version: [20.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Staring Node.js ${{ matrix.node-version }}
+      - name: Starting Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - name: install modules
-        run: npm install
+        run: npm ci --force
       - name: build production project
         run: npm run build:prod
         if: always()
       - name: build storybook
         run: npm run storybook:build
         if: always()
-      - name: screenshot testing
-        run: npm run test:ui:ci
-        if: always()
       - name: unit testing
         if: always()
         run: npm run test:unit
-      # - name: Generate HTML report
-      #   run: npm run test:ui:report
-      #   if: always()
-      # - name: move loki
-      #   run: mv .loki reports/
-      #   if: always()
       - name: Setup Pages
         uses: actions/configure-pages@v2
         if: always()
@@ -103,10 +55,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [17.x]
+        node-version: [20.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Staring Node.js ${{ matrix.node-version }}
+      - name: Starting Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -117,3 +69,6 @@ jobs:
         if: always()
       - name: linting css
         run: npm run lint:scss
+      - name: type checking
+        run: npm run types:check
+        if: always()

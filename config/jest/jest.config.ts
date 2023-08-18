@@ -25,7 +25,7 @@ export default {
   //   ],
   // ],
   testMatch: [
-    // Обнаружил разницу между МАК ОС и ВИНДОУС!!!
+    // note: this differs between macOS and Windows
     '<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)',
   ],
   rootDir: '../../',

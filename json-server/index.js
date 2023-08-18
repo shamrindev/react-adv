@@ -17,7 +17,7 @@ const router = jsonServer.router(path.resolve(__dirname, 'db.json'))
 server.use(jsonServer.defaults({}))
 server.use(jsonServer.bodyParser)
 
-// Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
+// small artificial delay so requests aren't instant — mimics a real API
 server.use(async (req, res, next) => {
   await new Promise((res) => {
     setTimeout(res, 800)
@@ -25,7 +25,7 @@ server.use(async (req, res, next) => {
   next()
 })
 
-// Эндпоинт для логина
+// login endpoint
 server.post('/login', (req, res) => {
   try {
     const { username, password } = req.body
@@ -39,7 +39,9 @@ server.post('/login', (req, res) => {
     )
 
     if (userFromBd) {
-      return res.json(userFromBd)
+      // never send the stored password back to the client
+      const { password: _password, ...safeUser } = userFromBd
+      return res.json(safeUser)
     }
 
     return res.status(403).json({ message: 'User not found' })
@@ -48,9 +50,8 @@ server.post('/login', (req, res) => {
   }
 })
 
-// проверяем, авторизован ли пользователь.
-// чтение (GET) доступно всем — гость может просматривать статьи;
-// для изменений (POST/PUT/PATCH/DELETE) по-прежнему нужна авторизация
+// auth guard: reads (GET) are open so guests can browse articles; any mutation
+// (POST/PUT/PATCH/DELETE) still requires an Authorization header
 // eslint-disable-next-line
 server.use((req, res, next) => {
   if (req.method !== 'GET' && !req.headers.authorization) {
@@ -66,7 +67,7 @@ const PORT = 8443
 const HTTP_PORT = 8003
 const httpsServer = https.createServer(options, server)
 const httpServer = http.createServer(server)
-// запуск сервера
+// start the servers (HTTPS + HTTP)
 httpsServer.listen(PORT, () => {
   console.log(`server is running on ${PORT} port`)
 })
