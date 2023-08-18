@@ -3,7 +3,10 @@
   height: 50px;
   position: relative;
   border-radius: 8px;
-  background: var(--pill-redesigned);
+
+  // dedicated tokens: the old shimmer used --bg-surface-redesigned, which is
+  // DARKER than the base pill, so the sweep was invisible on the dark theme.
+  background: var(--skeleton-bcg, var(--pill-redesigned));
   overflow: hidden;
 
   &::before {
@@ -17,7 +20,7 @@
     background: linear-gradient(
       to right,
       transparent 0%,
-      var(--bg-surface-redesigned) 50%,
+      var(--skeleton-shimmer, rgb(255 255 255 / 10%)) 50%,
       transparent 100%
     );
     animation: load 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;

@@ -2,18 +2,81 @@
   width: 100%;
 }
 
-.empty {
-  max-width: 520px;
+.wrapper {
+  max-width: 720px;
   margin: 0 auto;
-  padding: 72px 24px;
-  text-align: center;
 }
 
-.icon {
-  color: var(--text-muted-redesigned, #8ba1ab);
-  opacity: 0.6;
+.pageTitle p {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-redesigned);
 }
 
-.muted {
-  opacity: 0.7;
+.formCard {
+  width: 100%;
+  padding: 24px;
+}
+
+.label p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted-redesigned);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill, 999px);
+  border: 1px solid var(--divider-redesigned);
+  background: var(--pill-redesigned);
+  color: var(--text-muted-redesigned);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--accent-up);
+    color: var(--text-redesigned);
+  }
+}
+
+.chipActive {
+  border-color: var(--accent-up);
+  background: var(--accent-up);
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--divider-redesigned);
+  background: var(--bg-redesigned);
+  color: var(--text-redesigned);
+  font-family: var(--font-family-main);
+  font-size: 15px;
+  line-height: 1.5;
+  resize: vertical;
+
+  &::placeholder {
+    color: var(--text-muted-redesigned);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-up);
+  }
 }

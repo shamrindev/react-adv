@@ -1,6 +1,6 @@
 .sidebar {
   height: calc(100vh - var(--navbar-height));
-  width: 270px;
+  width: var(--app-sidebar-width, 264px);
   flex-shrink: 0;
   background: var(--bg-redesigned);
   border-right: 1px solid var(--divider-redesigned);
@@ -36,6 +36,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
   padding: 8px 12px;
   border-radius: 8px;
   color: var(--text-redesigned);
@@ -43,8 +45,10 @@
   transition: background 0.15s ease;
 }
 
-.community:hover {
-  background: var(--bg-surface-redesigned);
+@media (hover: hover) {
+  .community:hover {
+    background: var(--bg-surface-redesigned);
+  }
 }
 
 .community:active {
@@ -91,6 +95,9 @@
     height: auto;
     width: min(82vw, 320px);
     z-index: 9;
+
+    // distinct surface so the drawer reads as a panel above the dimmed page
+    background: var(--bg-surface-redesigned);
     transform: translateX(-100%);
     transition: transform 0.25s ease;
     box-shadow: 0 0 24px rgb(0 0 0 / 45%);

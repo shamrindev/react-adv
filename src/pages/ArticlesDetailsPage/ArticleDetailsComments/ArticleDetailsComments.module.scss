@@ -1,0 +1,30 @@
+.loginPrompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--divider-redesigned, #2a2a2a);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-surface-redesigned, transparent);
+  color: var(--text-muted-redesigned, #8ba1ab);
+  font: inherit;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.loginPrompt:hover {
+  border-color: var(--accent-up, #ff4500);
+}
+
+.signIn {
+  color: var(--accent-up, #ff4500);
+  font-weight: 700;
+}
+
+.loginPrompt:hover .signIn {
+  text-decoration: underline;
+}

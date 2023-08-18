@@ -1,3 +1,13 @@
-.cls {
-  position: static;
+.articletextblockcomponent {
+  display: block;
+}
+
+// a block heading is a body sub-heading, not a second post title — keep it
+// clearly smaller than the 24px article title so the post reads with one main
+// title (Reddit-style). Plain .title class now that it's a real <h3>.
+.title {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
 }

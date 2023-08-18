@@ -4,26 +4,35 @@
   gap: 16px;
 }
 
+// responsive grid: cards fill their column (full width on mobile, multi-column
+// on wider screens) instead of a fixed 280px width that overflowed on mobile.
 .SMALL {
-  max-width: 1200px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 
-  &.wrap {
-    flex-wrap: wrap;
-  }
-
-  &.no_wrap {
-    flex-wrap: nowrap;
-  }
+  // fill the parent (flex/VStack children don't stretch by default, so the grid
+  // would otherwise collapse to a single column)
+  width: 100%;
 
   .card {
-    display: inline-flex;
     min-height: 300px;
   }
 
   .row {
     display: flex;
     gap: 16px;
+  }
+}
+
+// "recommended" row: 3 across on desktop, stacked on mobile (never a horizontal
+// scroll that overflows the page).
+.SMALL.no_wrap {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .SMALL.no_wrap {
+    grid-template-columns: 1fr;
   }
 }

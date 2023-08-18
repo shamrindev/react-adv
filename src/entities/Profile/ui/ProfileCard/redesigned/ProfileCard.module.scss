@@ -2,7 +2,7 @@
   padding: 24px;
   background: var(--bg-surface-redesigned);
   border: 1px solid var(--divider-redesigned);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 }
 
 .label p {
@@ -18,4 +18,53 @@
 
 .error {
   align-items: center;
+}
+
+// editable avatar: click opens the change-avatar modal (instead of a raw URL
+// input in the form). overlay on hover + an always-visible badge for touch.
+.avatarBtn {
+  position: relative;
+  display: inline-flex;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.avatarOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 45%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+@media (hover: hover) {
+  .avatarBtn:hover .avatarOverlay {
+    opacity: 1;
+  }
+}
+
+.avatarBadge {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-up);
+  color: #fff;
+  font-size: 16px;
+  border: 2px solid var(--bg-surface-redesigned);
 }

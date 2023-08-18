@@ -14,14 +14,15 @@
   flex-shrink: 0;
 }
 
-.community p {
+.community {
   font-size: 12px;
   font-weight: 700;
   color: var(--text-redesigned);
   white-space: nowrap;
 }
 
-.meta p {
+.meta {
+  min-width: 0;
   color: var(--text-muted-redesigned);
   font-size: 12px;
   white-space: nowrap;
@@ -31,26 +32,25 @@
 
 .dots {
   margin-left: auto;
-
-  p {
-    color: var(--text-muted-redesigned);
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
+  color: var(--text-muted-redesigned);
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .titleLink {
   text-decoration: none;
 }
 
-.title p {
+.title {
+  margin: 0;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.35;
   color: var(--text-redesigned);
 }
 
-.snippet p {
+.snippet {
+  margin: 0;
   color: var(--text-muted-redesigned);
   font-size: 14px;
   line-height: 1.5;
@@ -62,7 +62,7 @@
 
 .imageLink {
   display: block;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
@@ -70,7 +70,7 @@
   width: 100%;
   max-height: 280px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 }
 
 .imgPlaceholder {
@@ -79,7 +79,7 @@
   justify-content: center;
   width: 100%;
   height: 160px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--pill-redesigned, #182226);
   color: var(--text-muted-redesigned, #8ba1ab);
   opacity: 0.85;
@@ -116,19 +116,42 @@
   padding: 0 8px;
 }
 
-// the Icon class lands on the <svg> itself, so target it directly (a
-// descendant `svg` selector here never matches) and outrank Icon's own colour.
-// the arrows are outline (stroke: currentColor), so colour via `color`.
-.votePill .upIcon {
+.voteBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+// arrows stay muted until the visitor votes (Reddit-style). the Icon class
+// lands on the <svg> itself, so colour it directly and outrank Icon's own colour.
+.upIcon,
+.downIcon {
+  color: var(--text-muted-redesigned);
+  transition: color 0.12s ease;
+}
+
+.voteBtn:hover .upIcon {
   color: var(--accent-up);
 }
 
-.votePill .downIcon {
+.voteBtn:hover .downIcon {
   color: var(--accent-down);
 }
 
-.voteCount p,
-.pillText p {
+.up {
+  color: var(--accent-up);
+}
+
+.down {
+  color: var(--accent-down);
+}
+
+.voteCount,
+.pillText {
   color: var(--text-redesigned);
   font-size: 12px;
   font-weight: 700;
@@ -136,13 +159,48 @@
 }
 
 .SMALL {
-  width: 280px;
-
   .img {
     max-height: 160px;
   }
 
-  .title p {
+  .title {
     font-size: 16px;
+  }
+
+  // compact action bar for narrow cards: keep the vote pill (with its count) but
+  // drop the comment/share labels to icon-only, so all three pills fit on one row
+  // instead of wrapping "Share" to a second line (labels overflow, esp. in RU).
+  .footer {
+    flex-wrap: nowrap;
+  }
+
+  .pill {
+    padding: 0 11px;
+  }
+
+  .pillText {
+    display: none;
+  }
+}
+
+// active vote score colour — kept last so it outranks `.voteCount` without
+// tripping stylelint's descending-specificity rule.
+.voteCount.up {
+  color: var(--accent-up);
+}
+
+.voteCount.down {
+  color: var(--accent-down);
+}
+
+// on narrow screens even the wide (BIG) card's labelled action bar overflows, so
+// collapse comment/share to icon-only there too (the vote count still shows).
+@media (max-width: 480px) {
+  .footer {
+    flex-wrap: nowrap;
+  }
+
+  .pillText {
+    display: none;
   }
 }

@@ -10,6 +10,24 @@
   --text-muted-redesigned: #8ba1ab;
   --divider-redesigned: rgb(255 255 255 / 8%);
   --radius-pill: 999px;
+
+  // shared layout grid so the navbar (search/actions) lines up with the body
+  // (sidebar + centered content) — one container width, one gutter everywhere.
+  --app-sidebar-width: 264px;
+  --app-content-max: 1100px;
+  --app-gutter: 16px;
+  --app-col-gap: 24px;
+
+  // code blocks: neutral dark surface + subtle border instead of the legacy
+  // theme's bright indigo (--code-bcg fell through to dark.scss before).
+  --code-bcg: #0d161a;
+  --code-border: var(--divider-redesigned);
+  --code-text: var(--text-redesigned);
+
+  // skeleton: visible base + a lighter sweep (the old shimmer was darker than
+  // the base, so loaders were nearly invisible on the dark theme).
+  --skeleton-bcg: #1b262c;
+  --skeleton-shimmer: #2b3a42;
   --font-family-main: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto,
     'Helvetica Neue', arial, sans-serif;
 
@@ -30,14 +48,24 @@
   --modal-border: var(--divider-redesigned);
   --modal-shadow: 0 12px 32px rgb(0 0 0 / 45%);
 
-  // the redesigned theme never defined --primary-color / --inverted-primary-color,
-  // so shared components that rely on them (Icon's default fill, the sidebar
-  // item icons) fell back to the deprecated theme's neon green/blue. Map them to
-  // the redesigned foreground so the icon set is a consistent monochrome (the
-  // orange logo, vote arrows and links keep their own accent overrides).
+  // generic foreground tokens consumed by shared components (Icon's default
+  // fill, sidebar item icons, etc.). Mapped to the redesigned foreground so the
+  // icon set is a consistent monochrome (the orange logo, vote arrows and links
+  // keep their own accent overrides).
   --primary-color: var(--text-redesigned);
   --inverted-primary-color: var(--text-redesigned);
   --secondary-color: var(--text-muted-redesigned);
+
+  // base + popup surface tokens consumed by shared components (Dropdown/Popup/
+  // ListBox menus, Loader, Select, scrollbars). The redesigned theme is now the
+  // single source of truth for these — no separate legacy palette.
+  --bg-color: var(--bg-redesigned);
+  --inverted-bg-color: var(--text-redesigned);
+  --card-bg: var(--bg-surface-redesigned);
+  --listbox-bg: var(--bg-surface-redesigned);
+  --popup-border: var(--divider-redesigned);
+  --popup-shadow: 0 8px 24px rgb(0 0 0 / 45%);
+  --popup-hover: var(--pill-redesigned);
 
   background: var(--bg-redesigned);
   color: var(--text-redesigned);
@@ -55,6 +83,13 @@
   // white surface; #6a6d6f is ~4.9:1
   --text-muted-redesigned: #6a6d6f;
   --divider-redesigned: rgb(0 0 0 / 10%);
+
+  // light code surface (border/text re-derive from the tokens above)
+  --code-bcg: #f6f7f8;
+
+  // light skeleton: light base + near-white sweep
+  --skeleton-bcg: #e4e7eb;
+  --skeleton-shimmer: #f5f7f9;
 }
 
 // subtle, neutral scrollbar inside redesigned scope (overrides the bright

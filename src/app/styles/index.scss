@@ -1,25 +1,22 @@
 @import './reset';
 @import './variables/global';
-@import './themes/normal';
-@import './themes/green';
-@import './themes/dark';
 @import './themes/redesigned';
 
-.app,
+.app_redesigned,
 .app_modal,
 .app_drawer {
   font: var(--font-m);
   color: var(--primary-color);
 }
 
-.app {
+.app_redesigned {
   min-height: 100vh;
-  background: var(--bg-color);
+  background: var(--bg-redesigned);
 }
 
 .storybookContainer {
   padding: 30px;
-  background: var(--bg-color);
+  background: var(--bg-redesigned);
 }
 
 .content-page {
@@ -29,14 +26,4 @@
 *::-webkit-scrollbar {
   width: 12px;
   height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: var(--card-bg);
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: var(--inverted-primary-color);
-  border-radius: 20px;
-  border: 2px solid var(--primary-color);
 }

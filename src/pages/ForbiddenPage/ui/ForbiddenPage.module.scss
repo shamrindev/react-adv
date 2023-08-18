@@ -1,0 +1,35 @@
+.ForbiddenPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.code {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent-up, #ff4500);
+}
+
+.message {
+  font-size: 18px;
+  color: var(--text-muted-redesigned, #8ba1ab);
+}
+
+.homeLink {
+  margin-top: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill, 999px);
+  background-color: var(--accent-up, #ff4500);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.homeLink:hover {
+  opacity: 0.9;
+}

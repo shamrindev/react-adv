@@ -5,9 +5,13 @@
 .options {
   position: absolute;
   z-index: 10;
+  overflow: hidden;
+  min-width: 140px;
+  padding: 4px;
   background-color: var(--listbox-bg);
   border-radius: 10px;
-  box-shadow: 4px 4px 8px var(--listbox-bg);
+  border: 1px solid var(--popup-border, transparent);
+  box-shadow: var(--popup-shadow, 4px 4px 8px var(--listbox-bg));
 
   // &.bottomLeft {
   //   top: calc(100% + 5px);
@@ -31,30 +35,22 @@
 }
 
 .item {
-  padding: 10px 20px;
+  padding: 8px 16px;
   position: relative;
-  transition: color 0.3s;
-
-  // &::after {
-  //   position: absolute;
-  //   content: '';
-  //   left: 20px;
-  //   bottom: 0;
-  //   width: 0;
-  //   height: 1px;
-  //   background-color: var(--secondary-color);
-  //   transition: width 0.3s;
-  // }
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
 
   &.selected {
     padding-left: 25px;
 
     &::before {
       position: absolute;
-      left: 5px;
+      left: 8px;
       top: calc(50% - 6px);
       content: '\2713';
-      color: var(--primary-color);
+      color: var(--accent-up, var(--primary-color));
       line-height: 12px;
     }
   }

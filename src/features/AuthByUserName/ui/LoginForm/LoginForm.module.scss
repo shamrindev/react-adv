@@ -1,7 +1,8 @@
 .loginform {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 100%;
+  box-sizing: border-box;
   gap: 20px;
 }
 
@@ -11,6 +12,7 @@
 }
 
 .loginBtn {
-  min-width: 140px;
-  margin-left: auto;
+  margin-top: 4px;
+  padding: 10px;
+  font-weight: 700;
 }

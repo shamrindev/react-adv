@@ -1,9 +1,12 @@
 .code {
-  border: 1px solid var(--primary-color);
+  // --code-border / --code-text let the redesigned theme give code blocks a
+  // neutral surface; legacy themes fall back to the old --primary-color look.
+  border: 1px solid var(--code-border, var(--primary-color));
   padding: 20px;
   position: relative;
   background: var(--code-bcg);
-  color: var(--primary-color);
+  color: var(--code-text, var(--primary-color));
+  border-radius: 8px;
   overflow: auto;
 }
 
@@ -14,5 +17,5 @@
 }
 
 .copyIcon path {
-  stroke: var(--primary-color);
+  stroke: var(--code-text, var(--primary-color));
 }

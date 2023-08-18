@@ -4,9 +4,28 @@
   gap: 4px;
 }
 
+// reset native button chrome; the star icon is the visible affordance
+.starBtn {
+  display: inline-flex;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  // visible keyboard focus ring (mouse clicks stay ring-free via :focus-visible)
+  &:focus-visible {
+    outline: 2px solid var(--accent-up);
+    outline-offset: 2px;
+  }
+}
+
 .starIcon {
   fill: var(--text-muted-redesigned);
-  cursor: pointer;
   padding: 2px;
   transition: fill 0.15s ease-in-out;
 }
@@ -17,10 +36,4 @@
 
 .hovered {
   fill: var(--accent-up);
-  cursor: pointer;
-}
-
-.isSelected {
-  cursor: auto;
-  pointer-events: none;
 }

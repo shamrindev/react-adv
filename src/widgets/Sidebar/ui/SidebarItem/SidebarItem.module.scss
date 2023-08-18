@@ -28,6 +28,10 @@
   margin-top: 0;
   gap: 12px;
   height: 40px;
+
+  // fill the nav width so the hover/active highlight spans the whole row
+  width: 100%;
+  box-sizing: border-box;
   padding: 0 12px;
   border-radius: 8px;
   color: var(--text-redesigned);
@@ -46,8 +50,12 @@
     font-size: 14px;
   }
 
-  &:hover {
-    background: var(--pill-redesigned);
+  // hover only on devices that actually hover — otherwise a tap leaves a
+  // stuck highlight on touch screens (looked like two active items).
+  @media (hover: hover) {
+    &:hover {
+      background: var(--pill-redesigned);
+    }
   }
 
   &.active {

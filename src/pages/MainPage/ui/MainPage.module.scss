@@ -1,14 +1,8 @@
-.redesigned {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.welcomeCard {
-  width: 100%;
-  padding: 24px;
-}
-
 // --- redesigned landing ---
+.content {
+  max-width: 760px;
+}
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -47,6 +41,25 @@
   color: var(--text-redesigned);
 }
 
+.viewAll {
+  align-self: center;
+  margin-top: 4px;
+  padding: 9px 22px;
+  border-radius: var(--radius-pill, 999px);
+  border: 1px solid var(--divider-redesigned);
+  background: var(--bg-surface-redesigned);
+  color: var(--text-redesigned);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: var(--accent-up);
+    color: var(--accent-up);
+  }
+}
+
 .communities {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -59,7 +72,7 @@
   align-items: center;
   gap: 12px;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--bg-surface-redesigned);
   border: 1px solid var(--divider-redesigned);
   text-decoration: none;
@@ -107,78 +120,4 @@
 .muted p {
   color: var(--text-muted-redesigned);
   line-height: 1.5;
-}
-
-.mainDescription {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-
-  h2 {
-    font-size: 2rem;
-    color: var(--header-color);
-    margin-bottom: 20px;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    color: var(--text-secondary-color);
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-
-  ul {
-    padding-left: 20px;
-
-    li {
-      margin-bottom: 10px;
-      color: var(--text-secondary-color);
-
-      strong {
-        font-weight: bold;
-      }
-    }
-  }
-
-  .links {
-    margin-top: 40px;
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      color: var(--text-link-color);
-      text-decoration: none;
-      transition: color 0.3s;
-
-      &:hover {
-        opacity: 0.85;
-      }
-    }
-  }
-}
-
-.testsTitle {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.testItem {
-  display: block;
-  padding-left: 40px;
-  position: relative;
-  margin-bottom: 10px;
-
-  &::after {
-    position: absolute;
-    content: '';
-    width: 8px;
-    height: 8px;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    background-color: var(--inverted-bg-color);
-  }
 }

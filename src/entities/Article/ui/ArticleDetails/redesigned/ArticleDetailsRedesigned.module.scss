@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background-color: var(--bg-surface-redesigned);
   max-width: 740px;
   width: 100%;
@@ -50,8 +50,22 @@
 .actions {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
-  margin: 4px 0;
+
+  // action bar sits at the bottom of the post (Reddit order), separated from
+  // the content by a subtle divider
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--divider-redesigned);
+}
+
+// on phones the labelled action pills overflow the card, so collapse
+// comment/share to icon-only (the vote pill keeps its count)
+@media (max-width: 480px) {
+  .pillText {
+    display: none;
+  }
 }
 
 .pill,
@@ -75,13 +89,37 @@
   padding: 0 10px;
 }
 
-// the Icon class lands on the <svg> itself; target it directly and outrank
-// Icon's own colour. arrows are outline (stroke: currentColor) -> colour them
-.votePill .upIcon {
+.voteBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+// arrows are muted until the visitor votes (Reddit-style); the Icon class lands
+// on the <svg> itself, so colour it directly and outrank Icon's own colour.
+.upIcon,
+.downIcon {
+  color: var(--text-muted-redesigned);
+  transition: color 0.12s ease;
+}
+
+.voteBtn:hover .upIcon {
   color: var(--accent-up);
 }
 
-.votePill .downIcon {
+.voteBtn:hover .downIcon {
+  color: var(--accent-down);
+}
+
+.up {
+  color: var(--accent-up);
+}
+
+.down {
   color: var(--accent-down);
 }
 
@@ -103,4 +141,14 @@
     line-height: 1.55;
     margin-bottom: 8px;
   }
+}
+
+// active vote score colour — kept last so it outranks `.voteCount p` without
+// tripping stylelint's descending-specificity rule.
+.voteCount.up p {
+  color: var(--accent-up);
+}
+
+.voteCount.down p {
+  color: var(--accent-down);
 }

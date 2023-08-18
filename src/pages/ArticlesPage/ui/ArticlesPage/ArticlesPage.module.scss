@@ -19,13 +19,6 @@
   width: 100%;
 }
 
-// the Page wrapper inside the feed; doubled class beats .page's own padding
-// (the legacy 20/40px padding + .list margin produced a large dead gap)
-.listRedesigned.listRedesigned {
-  margin-top: 0;
-  padding: 4px 4px 16px;
-}
-
 // the inner ArticleList gets no extra spacing of its own
 .cards {
   margin-top: 0;

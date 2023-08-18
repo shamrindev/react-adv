@@ -42,7 +42,7 @@
   background: var(--modal-border, var(--bg-color));
   margin: auto;
   bottom: 40px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 }
 
 .opened {
@@ -68,7 +68,7 @@
   left: 2vw;
   height: calc(100vh + 50px);
   width: 96vw;
-  border-radius: 12px 12px 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0;
 
   // redesigned surface (falls back to legacy `--bg-color` in the old theme)
   background: var(--modal-surface, var(--bg-color));

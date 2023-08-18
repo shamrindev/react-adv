@@ -24,7 +24,7 @@
 
 .content {
   padding: 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 
   // redesigned theme sets these surface vars on the `.app_redesigned` wrapper;
   // the deprecated theme leaves them unset and falls back to the legacy tokens,
@@ -33,23 +33,77 @@
   color: var(--modal-text, var(--primary-color));
   border: 1px solid var(--modal-border, transparent);
   box-shadow: var(--modal-shadow, none);
-  transition: transform 0.3s;
-  transform: scale(0.5);
-  max-width: 60%;
+
+  // comfortable fixed width that shrinks to fit small screens (was `max-width:
+  // 60%`, which on mobile became narrower than the form and clipped it)
+  width: min(440px, calc(100vw - 32px));
+  box-sizing: border-box;
+
+  // hidden until opened; the .opened / .isClosing animations drive the
+  // enter/exit transitions (a keyframe animates reliably on mount, unlike a
+  // transition whose start frame is never painted)
+  opacity: 0;
 }
 
 .opened {
   pointer-events: auto;
   opacity: 1;
   z-index: var(--modal-z-index);
+  animation: overlay-in 0.2s ease;
 
   .content {
-    transform: scale(1);
+    animation: modal-in 0.2s ease forwards;
   }
 }
 
 .isClosing {
+  animation: overlay-out 0.2s ease forwards;
+
   .content {
-    transform: scale(0.2);
+    animation: modal-out 0.2s ease forwards;
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlay-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modal-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
   }
 }
